@@ -7,7 +7,6 @@ import {
 import Icon from '@material-ui/core/Icon';
 import Person from '@material-ui/icons/Person';
 import WavesIcon from '@material-ui/icons/Waves';
-// import classNames from 'classnames';
 
 import { Routes } from '../../types/Routes';
 import sidebarStyle from './sidebarStyle';
