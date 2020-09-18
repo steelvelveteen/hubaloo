@@ -1,6 +1,11 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 const sidebarStyle = makeStyles((theme: Theme) => ({
+    drawerPaper: {
+        width: '200px',
+        color: 'green',
+        backgroundColor: 'pink'
+    },
     list: {
         marginTop: '20px',
         paddingLeft: '0',

@@ -7,6 +7,7 @@ import {
 import Icon from '@material-ui/core/Icon';
 import Person from '@material-ui/icons/Person';
 import WavesIcon from '@material-ui/icons/Waves';
+// import classNames from 'classnames';
 
 import { Routes } from '../../types/Routes';
 import sidebarStyle from './sidebarStyle';
@@ -25,13 +26,6 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
     const classes = useStyles();
     const { routes } = sidebarProps;
     const links = (
-        // <List>
-        //     {['Profile', 'Spots', 'Events', 'LiveCams', 'What Not'].map((linkLabel: string) => (
-        //         <ListItem button key={linkLabel}>
-        //             {linkLabel}
-        //         </ListItem>
-        //     ))}
-        // </List>
         <List className={classes.list}>
             {routes.map((prop: Routes, index: number) => (
                 <NavLink
@@ -55,9 +49,12 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
 
     return (
         <>
-            <Hidden implementation="css" mdUp>
+            <Hidden implementation="js" mdUp>
                 <Drawer
                     anchor="right"
+                    classes={{
+                        paper: classes.drawerPaper
+                    }}
                     onClose={sidebarProps.handleDrawerToggle}
                     open={sidebarProps.drawerOpen}
                     variant="temporary"
@@ -66,7 +63,11 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
                 </Drawer>
             </Hidden>
             <Hidden smDown>
-                <Drawer anchor="right"
+                <Drawer
+                    anchor="right"
+                    classes={{
+                        paper: classes.drawerPaper
+                    }}
                     onClose={sidebarProps.handleDrawerToggle}
                     open
                     variant="persistent"

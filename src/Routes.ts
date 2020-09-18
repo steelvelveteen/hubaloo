@@ -28,7 +28,7 @@ const routes: Routes[] = [
         routeId: 30,
         path: '/liveCams',
         // icon: VideocamIcon,
-        routeName: 'Live Cams',
+        routeName: 'Webcams',
         // component: Home,
         layout: '/mainboard'
     },
