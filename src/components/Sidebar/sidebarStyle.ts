@@ -75,7 +75,7 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
             content: '""',
             display: 'block',
             background: 'black',
-            opacity: '.8'
+            opacity: '.9'
         }
     }
 }));
