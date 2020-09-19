@@ -18,9 +18,13 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         height: '100vh',
     },
     content: {
+        [theme.breakpoints.up('md')]: {
+            borderLeft: `1px solid ${containerBorderColor}`,
+            borderRight: `1px solid ${containerBorderColor}`,
+        },
         margin: '1rem auto',
-        borderLeft: `1px solid ${containerBorderColor}`,
-        borderRight: `1px solid ${containerBorderColor}`,
+        // borderLeft: `1px solid ${containerBorderColor}`,
+        // borderRight: `1px solid ${containerBorderColor}`,
         width: '80%',
         color: 'white',
         marginTop: '1.1rem',

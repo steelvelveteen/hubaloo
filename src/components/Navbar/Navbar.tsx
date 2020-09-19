@@ -51,7 +51,8 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                     <IconButton color="inherit" edge="end">
                         <SearchIcon />
                     </IconButton>
-                    <Hidden only={["xs", "md"]}>
+                    <Hidden only={["xs", "md", "lg", "xl"]}>
+                        {/* <Hidden mdUp> */}
                         <IconButton color="inherit" edge="end"
                             onClick={navbarProps.handleDrawerToggle}>
                             <Menu />

@@ -16,9 +16,12 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         zIndex: 4,
     },
     img: {
-        width: '55px',
-        height: '40px',
+        width: '45px',
+        height: '28px',
         paddingRight: '25px',
+        paddingLeft: '10px',
+        position: 'relative' as const,
+        top: '2px'
     },
     bottomNavBar: {
         backgroundColor: 'black',

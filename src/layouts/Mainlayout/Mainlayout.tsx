@@ -53,7 +53,7 @@ const Mainlayout: React.FC = () => {
                 routes={routes} />
             <div className={classes.mainPanel}>
                 <Navbar
-                    brandName="hubaloo"
+                    brandName="habaloo"
                     handleDrawerToggle={handleDrawerToggle} logo={logo}
                     routes={routes} />
                 <div className={classes.content}>
