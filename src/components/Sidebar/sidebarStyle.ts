@@ -3,8 +3,8 @@ import { makeStyles, Theme } from '@material-ui/core';
 const sidebarStyle = makeStyles((theme: Theme) => ({
     drawerPaper: {
         width: '200px',
-        color: 'green',
-        backgroundColor: 'pink'
+        border: '0',
+        zIndex: 1,
     },
     list: {
         marginTop: '20px',
@@ -34,7 +34,6 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
         backgroundColor: 'transparent'
     },
     itemIcon: {
-        color: 'black',
         width: '24px',
         height: '30px',
         fontSize: '24px',
@@ -48,29 +47,38 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
         margin: '0',
         lineHeight: '30px',
         fontSize: '1rem',
-        color: 'black'
+        color: 'white'
     },
-    // background: {
-    //     position: 'absolute',
-    //     zIndex: 1,
-    //     height: '100%',
-    //     width: '100%',
-    //     display: 'block',
-    //     top: '0',
-    //     left: '0',
-    //     backgroundSize: 'cover',
-    //     backgroundPosition: 'center center',
-    //     '&:after': {
-    //         position: 'absolute',
-    //         zIndex: 3,
-    //         width: '100%',
-    //         height: '100%',
-    //         content: '""',
-    //         display: 'block',
-    //         background: 'black',
-    //         opacity: '.9'
-    //     }
-    // }
+    sidebarWrapper: {
+        zIndex: 4,
+        position: 'relative',
+        height: 'calc(100vh - 75px)',
+        overflow: 'auto',
+        width: '200px',
+        overflowScrolling: 'touch',
+
+    },
+    background: {
+        position: 'absolute',
+        zIndex: 1,
+        height: '100%',
+        width: '100%',
+        display: 'block',
+        top: '0',
+        left: '0',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        '&:after': {
+            position: 'absolute',
+            zIndex: 3,
+            width: '100%',
+            height: '100%',
+            content: '""',
+            display: 'block',
+            background: 'black',
+            opacity: '.8'
+        }
+    }
 }));
 
 export default sidebarStyle;

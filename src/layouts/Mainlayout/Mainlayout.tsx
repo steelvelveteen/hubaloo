@@ -1,6 +1,7 @@
 import React from 'react';
 
 import logo from '../../assets/img/reactlogo.png';
+import sidebarBgImage from '../../assets/img/sidebar-bg.jpg';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import routes from '../../Routes';
@@ -21,6 +22,7 @@ const Mainlayout: React.FC = () => {
             <Sidebar
                 drawerOpen={drawerOpen}
                 handleDrawerToggle={handleDrawerToggle}
+                image={sidebarBgImage}
                 routes={routes} />
             <div className={classes.mainPanel}>
                 <Navbar handleDrawerToggle={handleDrawerToggle} logo={logo} logoText="hubaloo" />

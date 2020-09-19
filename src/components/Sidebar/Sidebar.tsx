@@ -15,7 +15,7 @@ type SidebarProps = {
     handleDrawerToggle: () => void;
     // backgroundColor: string;
     // brandLogo: string;
-    // image: string;
+    image: string;
     // textLogo: string;
     routes: Routes[];
     drawerOpen: boolean;
@@ -23,10 +23,10 @@ type SidebarProps = {
 const useStyles = sidebarStyle;
 const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
     const classes = useStyles();
-    const { routes } = sidebarProps;
+    const { routes, image } = sidebarProps;
     const links = (
         <List className={classes.list}>
-            {routes.map((prop: Routes, index: number) => (
+            {routes.map((prop: Routes) => (
                 <NavLink
                     className={classes.item}
                     key={prop.routeId}
@@ -34,12 +34,9 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
                 >
                     <ListItem button className={classes.itemLink}>
                         <Icon className={classes.itemIcon}>
-                            {index % 2 === 0 ? <WavesIcon /> : <Person />}
-                            <WavesIcon />
+                            <prop.icon />
                         </Icon>
-                        <ListItemText className={classes.itemText} primary={prop.routeName}>
-                            {prop.routeName}hjkkjh
-                        </ListItemText>
+                        <ListItemText className={classes.itemText} primary={prop.routeName} />
                     </ListItem>
                 </NavLink>
             ))}
@@ -58,7 +55,11 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
                     open={sidebarProps.drawerOpen}
                     variant="temporary"
                 >
-                    {links}
+                    <div className={classes.sidebarWrapper}>{links}</div>
+                    <div
+                        className={classes.background}
+                        style={{ backgroundImage: `url(${image})` }} />
+
                 </Drawer>
             </Hidden>
             <Hidden smDown>
@@ -69,9 +70,13 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
                     }}
                     onClose={sidebarProps.handleDrawerToggle}
                     open
-                    variant="persistent"
+                    variant="permanent"
                 >
-                    {links}
+                    <div className={classes.sidebarWrapper}>{links}</div>
+                    <div
+                        className={classes.background}
+                        style={{ backgroundImage: `url(${image})` }} />
+
                 </Drawer>
             </Hidden>
         </>

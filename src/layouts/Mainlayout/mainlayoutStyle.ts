@@ -7,7 +7,7 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
     },
     mainPanel: {
         [theme.breakpoints.up('md')]: {
-            width: `calc(100% - 180px)`,
+            width: `calc(100% - 200px)`,
         },
         background: 'pink',
         width: '100%',
