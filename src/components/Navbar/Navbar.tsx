@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                         {navbarProps.logoText} {/** hubaloo */}
                     </div>
                     <Hidden smDown>
-                        <Button color="inherit">Visible mdUp</Button>
+                        <Button color="inherit">A better search</Button>
                     </Hidden>
                     <IconButton color="inherit" edge="end">
                         <SearchIcon />
@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                         {navbarProps.routes.map((routes: Routes) => (
                             <IconButton color="inherit" edge="end">
                                 <NavLink className={classes.iconLink} to={routes.layout + routes.path}>
-                                    <routes.icon />
+                                    <routes.icon className={classes.icons} />
                                 </NavLink>
                             </IconButton>
                         ))}

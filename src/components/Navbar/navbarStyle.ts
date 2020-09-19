@@ -29,10 +29,15 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         justifyContent: 'space-between'
     },
     iconLink: {
-        color: 'white'
+        color: '#868c91',
+        width: '30px',
+        height: '30px',
+        border: '1px solid #5c5d5e',
+        padding: '5px',
+        borderRadius: '50%'
     },
-    logoLink: {
-        flex: 1
+    icons: {
+        fontSize: '22px'
     }
 }));
 
