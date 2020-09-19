@@ -16,6 +16,15 @@ const Mainlayout: React.FC = () => {
     const handleDrawerToggle = (): void => {
         setDrawerToggle(!drawerOpen);
     }
+    const resizeFunction = () => {
+        if (window.innerWidth <= 600) {
+            setDrawerToggle(false);
+        }
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('resize', resizeFunction);
+    });
 
     return (
         <div className={classes.wrapper}>
