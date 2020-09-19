@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '../../assets/img/reactlogo.png';
+import logo from '../../assets/img/logo.png';
 import sidebarBgImage from '../../assets/img/sidebar-bg.jpg';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';

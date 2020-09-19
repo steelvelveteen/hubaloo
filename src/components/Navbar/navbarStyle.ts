@@ -12,7 +12,8 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         zIndex: 4,
     },
     img: {
-        width: "55px",
+        width: '55px',
+        paddingRight: '25px',
     },
     bottomNavBar: {
         [theme.breakpoints.down('xs')]: {

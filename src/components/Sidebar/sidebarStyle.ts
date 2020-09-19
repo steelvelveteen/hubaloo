@@ -1,8 +1,10 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
+import { drawerWidth } from '../../assets/tsstyles/constants';
+
 const sidebarStyle = makeStyles((theme: Theme) => ({
     drawerPaper: {
-        width: '200px',
+        width: drawerWidth,
         border: '0',
         zIndex: 1,
     },
@@ -34,9 +36,8 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
         backgroundColor: 'transparent'
     },
     itemIcon: {
-        width: '24px',
+        width: '28px',
         height: '30px',
-        fontSize: '24px',
         lineHeight: '30px',
         float: 'left',
         marginRight: '15px',
@@ -45,14 +46,12 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
     },
     itemText: {
         margin: '0',
-        lineHeight: '30px',
-        fontSize: '1rem',
-        color: 'white'
+        fontSize: '0.9rem',
     },
     sidebarWrapper: {
         zIndex: 4,
         position: 'relative',
-        height: 'calc(100vh - 75px)',
+        // height: 'calc(100vh - 75px)',
         overflow: 'auto',
         width: '200px',
         overflowScrolling: 'touch',
