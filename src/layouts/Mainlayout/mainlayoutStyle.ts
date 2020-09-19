@@ -20,7 +20,7 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         backgroundColor: 'yellow',
         // marginTop: '1.1rem',
         padding: '1.5rem 1rem',
-        minHeight: 'calc(100vh - 125px)'
+        // minHeight: 'calc(100vh - 125px)'
     },
     container: {
         paddingRight: '1rem',

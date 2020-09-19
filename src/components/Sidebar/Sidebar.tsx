@@ -28,6 +28,7 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
                 <NavLink
                     className={classes.item}
                     key={prop.routeId}
+                    onClick={sidebarProps.handleDrawerToggle}
                     to={prop.layout + prop.path}
                 >
                     <ListItem button className={classes.itemLink}>

@@ -16,6 +16,7 @@ const Mainlayout: React.FC = () => {
     const classes = useStyles();
 
     const handleDrawerToggle = (): void => {
+        console.log('Sidebar link clicked');
         setDrawerToggle(!drawerOpen);
     }
     const resizeFunction = () => {
