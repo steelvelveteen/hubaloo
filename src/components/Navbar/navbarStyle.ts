@@ -25,6 +25,9 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         display: 'flex',
         justifyContent: 'space-between'
     },
+    iconLink: {
+        color: 'white'
+    }
 }));
 
 export default navbarStyle;

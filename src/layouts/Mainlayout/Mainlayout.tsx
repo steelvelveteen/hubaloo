@@ -16,7 +16,6 @@ const Mainlayout: React.FC = () => {
     const classes = useStyles();
 
     const handleDrawerToggle = (): void => {
-        console.log('Sidebar link clicked');
         setDrawerToggle(!drawerOpen);
     }
     const resizeFunction = () => {
@@ -53,7 +52,10 @@ const Mainlayout: React.FC = () => {
                 image={sidebarBgImage}
                 routes={routes} />
             <div className={classes.mainPanel}>
-                <Navbar handleDrawerToggle={handleDrawerToggle} logo={logo} logoText="hubaloo" />
+                <Navbar
+                    handleDrawerToggle={handleDrawerToggle}
+                    logo={logo} logoText="hubaloo"
+                    routes={routes} />
                 <div className={classes.content}>
                     <div className={classes.container}>{switchRoutes}</div>
                 </div>

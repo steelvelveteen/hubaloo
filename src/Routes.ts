@@ -1,6 +1,7 @@
-import { Home } from "@material-ui/icons";
-import Person from "@material-ui/icons/Person";
-import VideocamIcon from "@material-ui/icons/Videocam";
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import PersonOutlineIcon from "@material-ui/icons/PersonOutlineOutlined";
+import PoolOutlinedIcon from '@material-ui/icons/PoolOutlined';
+import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
 import WavesIcon from "@material-ui/icons/Waves";
 
 import { Routes } from "./types/Routes";
@@ -14,15 +15,15 @@ const routes: Routes[] = [
     {
         routeId: 10,
         path: '/home',
-        icon: Home,
+        icon: HomeOutlinedIcon,
         routeName: 'Home',
         component: HomePage,
         layout: '/mainboard'
     },
     {
         routeId: 20,
-        path: '/user',
-        icon: Person,
+        path: '/profile',
+        icon: PersonOutlineIcon,
         routeName: 'Profile',
         component: ProfilePage,
         layout: '/mainboard'
@@ -30,7 +31,7 @@ const routes: Routes[] = [
     {
         routeId: 30,
         path: '/liveCams',
-        icon: VideocamIcon,
+        icon: VideocamOutlinedIcon,
         routeName: 'Webcams',
         component: WebcamsPage,
         layout: '/mainboard'
@@ -47,7 +48,7 @@ const routes: Routes[] = [
     {
         routeId: 50,
         path: '/spots',
-        icon: WavesIcon,
+        icon: PoolOutlinedIcon,
         routeName: 'Spots',
         component: SpotsPage,
         layout: '/mainboard'
