@@ -7,6 +7,7 @@ import {
 import Menu from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { flameColor } from '../../assets/tsstyles/constants';
 import { Routes } from '../../types/Routes';
 import navbarStyle from './navbarStyle';
 
@@ -67,8 +68,8 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                                 <NavLink
                                     // activeClassName={activeRoute(route.layout + route.path) ? "activeIcon" : ""}
                                     activeStyle={{
-                                        color: '#e25822',
-                                        border: '2px solid #e25822'
+                                        color: flameColor,
+                                        border: `2px solid ${flameColor}`
                                     }}
                                     className={classes.iconLink}
                                     exact

@@ -1,9 +1,12 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
+import { iconOutlineColor } from '../../assets/tsstyles/constants';
+
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
         position: 'relative' as const,
         backgroundColor: 'black',
+        borderBottom: `1px solid ${iconOutlineColor}`
     },
     logo: {
         flex: 1,
@@ -23,16 +26,17 @@ const navbarStyle = makeStyles((theme: Theme) => ({
             top: 'auto',
             bottom: '0',
         },
+        borderTop: `1px solid ${iconOutlineColor}`
     },
     spacedIcons: {
         display: 'flex',
         justifyContent: 'space-between'
     },
     iconLink: {
-        color: '#868c91',
+        color: iconOutlineColor,
         width: '30px',
         height: '30px',
-        border: '1px solid #5c5d5e',
+        border: `1px solid ${iconOutlineColor}`,
         padding: '5px',
         borderRadius: '50%'
     },
