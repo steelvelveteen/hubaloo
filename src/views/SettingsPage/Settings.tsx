@@ -1,7 +1,7 @@
 import React from 'react';
 
-const EventsPage: React.FC = () => {
-    const salutation = 'Events Page';
+const SettingsPage: React.FC = () => {
+    const salutation = 'Settings Page';
 
     return (
         <div>
@@ -10,4 +10,4 @@ const EventsPage: React.FC = () => {
     );
 };
 
-export default EventsPage;
+export default SettingsPage;

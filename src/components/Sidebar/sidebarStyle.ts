@@ -18,40 +18,28 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
         position: 'unset'
     },
     item: {
+        color: 'white',
         position: 'relative',
         display: 'block',
+        borderRadius: '3px',
         textDecoration: 'none',
         '&:hover,&:focus,&:visited,&': {
-            color: 'white'
+            // color: 'white'
         }
     },
     itemLink: {
+        display: 'flex',
         width: 'auto',
         transition: 'all 300ms linear',
         margin: '10px 15px 0',
-        borderRadius: '3px',
         position: 'relative',
-        display: 'block',
         padding: '10px 15px',
-        backgroundColor: 'transparent',
-        // '&:focus': {
-        //     backgroundColor: '#e25822'
-        // }
     },
     itemIcon: {
-        width: '28px',
-        height: '30px',
-        lineHeight: '30px',
-        float: 'left',
-        marginRight: '15px',
-        textAlign: 'center',
-        verticalAlign: 'middle'
+        marginRight: '1rem',
     },
     itemText: {
-        margin: '0',
         fontSize: '0.9rem',
-        display: 'flex',
-        alignItems: 'center'
     },
     sidebarWrapper: {
         padding: '10px',

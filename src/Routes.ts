@@ -1,15 +1,15 @@
-import { SettingsOutlined } from '@material-ui/icons';
 import EventIcon from '@material-ui/icons/Event';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import PersonOutlineIcon from "@material-ui/icons/PersonOutlineOutlined";
 import PoolOutlinedIcon from '@material-ui/icons/PoolOutlined';
+import SettingsOutlined from '@material-ui/icons/SettingsOutlined';
 import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
-import WavesIcon from "@material-ui/icons/Waves";
 
 import { Routes } from "./types/Routes";
 import EventsPage from './views/EventsPage/Events';
 import HomePage from './views/HomePage/Home';
 import ProfilePage from './views/ProfilePage/Profile';
+import SettingsPage from './views/SettingsPage/Settings';
 import SpotsPage from './views/SpotsPage/Spots';
 import WebcamsPage from './views/WebcamsPage/Webcams';
 
@@ -57,10 +57,10 @@ const routes: Routes[] = [
     },
     {
         routeId: 99999,
-        path: '/spots',
+        path: '/settings',
         icon: SettingsOutlined,
         routeName: 'Settings',
-        component: SpotsPage,
+        component: SettingsPage,
         layout: '/mainboard'
     }
 ];

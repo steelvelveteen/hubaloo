@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import {
-    AppBar, Button, Hidden, IconButton, Toolbar
+    AppBar, Button, Hidden, IconButton, Toolbar, Typography
 } from '@material-ui/core';
 import Menu from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -12,7 +12,7 @@ import navbarStyle from './navbarStyle';
 
 type NavbarProps = {
     logo: any,
-    logoText: string,
+    brandName: string,
     routes: Routes[];
     handleDrawerToggle: () => void
 };
@@ -40,7 +40,9 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                         <NavLink to="/maindboard/home">
                             <img alt="logo" className={classes.img} src={navbarProps.logo} />
                         </NavLink>
-                        {navbarProps.logoText} {/** hubaloo */}
+                        <Typography variant="h5">
+                            {navbarProps.brandName} {/** hubaloo */}
+                        </Typography>
                     </div>
                     <Hidden smDown>
                         <Button color="inherit">A better search</Button>
@@ -68,7 +70,6 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                                         color: '#e25822',
                                         border: '2px solid #e25822'
                                     }}
-                                    // eslint-disable-next-line no-restricted-globals
                                     className={classes.iconLink}
                                     exact
                                     key={route.routeId}

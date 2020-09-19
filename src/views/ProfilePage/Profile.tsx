@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Profile: React.FC = () => {
+const ProfilePage: React.FC = () => {
     const salutation = 'Member Profile';
 
     return (
@@ -10,4 +10,4 @@ const Profile: React.FC = () => {
     );
 };
 
-export default Profile;
+export default ProfilePage;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Profile: React.FC = () => {
+const SpotsPage: React.FC = () => {
     const salutation = 'In the Spots page';
 
     return (
@@ -10,4 +10,4 @@ const Profile: React.FC = () => {
     );
 };
 
-export default Profile;
+export default SpotsPage;

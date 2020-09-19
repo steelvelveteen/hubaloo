@@ -53,8 +53,8 @@ const Mainlayout: React.FC = () => {
                 routes={routes} />
             <div className={classes.mainPanel}>
                 <Navbar
-                    handleDrawerToggle={handleDrawerToggle}
-                    logo={logo} logoText="hubaloo"
+                    brandName="hubaloo"
+                    handleDrawerToggle={handleDrawerToggle} logo={logo}
                     routes={routes} />
                 <div className={classes.content}>
                     <div className={classes.container}>{switchRoutes}</div>
