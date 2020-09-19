@@ -22,29 +22,29 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
     const classes = useStyles();
     return (
         <>
-            <Hidden xsDown>
-                <AppBar className={classes.navbar}>
-                    <Toolbar>
-                        <div className={classes.logo}>
-                            <img alt="logo" className={classes.img} src={navbarProps.logo} />
-                            {navbarProps.logoText} {/** hubaloo */}
-                        </div>
-                        <Hidden smDown>
-                            <Button color="inherit">Visible mdUp</Button>
-                        </Hidden>
-                        <Hidden mdUp>
-                            <IconButton color="inherit" edge="end">
-                                <SearchIcon />
-                            </IconButton>
-                            <IconButton color="inherit" edge="end"
-                                onClick={navbarProps.handleDrawerToggle}>
-                                <Menu />
-                            </IconButton>
-                        </Hidden>
-                    </Toolbar>
-                </AppBar>
-            </Hidden>
 
+            <AppBar className={classes.navbar}>
+                <Toolbar>
+                    <div className={classes.logo}>
+                        <NavLink to="/maindboard/home">
+                            <img alt="logo" className={classes.img} src={navbarProps.logo} />
+                        </NavLink>
+                        {navbarProps.logoText} {/** hubaloo */}
+                    </div>
+                    <Hidden smDown>
+                        <Button color="inherit">Visible mdUp</Button>
+                    </Hidden>
+                    <IconButton color="inherit" edge="end">
+                        <SearchIcon />
+                    </IconButton>
+                    <Hidden only={["xs", "md"]}>
+                        <IconButton color="inherit" edge="end"
+                            onClick={navbarProps.handleDrawerToggle}>
+                            <Menu />
+                        </IconButton>
+                    </Hidden>
+                </Toolbar>
+            </AppBar>
             <Hidden smUp>
                 <AppBar className={classes.bottomNavBar} position="fixed">
                     <Toolbar className={classes.spacedIcons}>

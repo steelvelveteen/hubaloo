@@ -51,7 +51,7 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
     sidebarWrapper: {
         zIndex: 4,
         position: 'relative',
-        // height: 'calc(100vh - 75px)',
+        height: 'calc(100vh - 75px)',
         overflow: 'auto',
         width: '200px',
         overflowScrolling: 'touch',
