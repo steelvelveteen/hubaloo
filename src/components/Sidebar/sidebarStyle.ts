@@ -33,7 +33,10 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
         position: 'relative',
         display: 'block',
         padding: '10px 15px',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        // '&:focus': {
+        //     backgroundColor: '#e25822'
+        // }
     },
     itemIcon: {
         width: '28px',
@@ -47,13 +50,16 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
     itemText: {
         margin: '0',
         fontSize: '0.9rem',
+        display: 'flex',
+        alignItems: 'center'
     },
     sidebarWrapper: {
+        padding: '10px',
+        borderRadius: '3px',
         zIndex: 4,
         position: 'relative',
         height: 'calc(100vh - 75px)',
         overflow: 'auto',
-        width: '200px',
         overflowScrolling: 'touch',
 
     },

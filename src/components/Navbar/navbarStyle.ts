@@ -34,10 +34,18 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         height: '30px',
         border: '1px solid #5c5d5e',
         padding: '5px',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        // "&:focus, &:hover": {
+        //     color: '#e25822',
+        //     border: '2px solid #e25822'
+        // }
     },
     icons: {
         fontSize: '22px'
+    },
+    activeIcon: {
+        color: '#e25822',
+        border: '2px solid #e25822'
     }
 }));
 

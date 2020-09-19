@@ -26,6 +26,9 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
         <List className={classes.list}>
             {routes.map((prop: Routes) => (
                 <NavLink
+                    activeStyle={{
+                        backgroundColor: ' #e25822'
+                    }}
                     className={classes.item}
                     key={prop.routeId}
                     onClick={sidebarProps.handleDrawerToggle}

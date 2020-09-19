@@ -1,3 +1,5 @@
+import { SettingsOutlined } from '@material-ui/icons';
+import EventIcon from '@material-ui/icons/Event';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import PersonOutlineIcon from "@material-ui/icons/PersonOutlineOutlined";
 import PoolOutlinedIcon from '@material-ui/icons/PoolOutlined';
@@ -40,7 +42,7 @@ const routes: Routes[] = [
     {
         routeId: 40,
         path: '/events',
-        icon: WavesIcon,
+        icon: EventIcon,
         routeName: 'Events',
         component: EventsPage,
         layout: '/mainboard'
@@ -53,6 +55,14 @@ const routes: Routes[] = [
         component: SpotsPage,
         layout: '/mainboard'
     },
+    {
+        routeId: 99999,
+        path: '/spots',
+        icon: SettingsOutlined,
+        routeName: 'Settings',
+        component: SpotsPage,
+        layout: '/mainboard'
+    }
 ];
 
 export default routes;

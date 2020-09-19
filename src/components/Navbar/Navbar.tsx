@@ -20,6 +20,17 @@ const useStyles = navbarStyle;
 
 const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
     const classes = useStyles();
+    // const activeRoute = (routeName: string): boolean => {
+    //     console.log(routeName);
+    //     return window.location.pathname === routeName
+    // };
+
+    // Code below prints out pathname ex.: /mainboard/profile
+    // const activeRoute = () => console.log(window.location.pathname);
+    // React.useEffect(() => {
+    //     window.addEventListener('load', activeRoute);
+    // });
+
     return (
         <>
 
@@ -48,10 +59,21 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
             <Hidden smUp>
                 <AppBar className={classes.bottomNavBar} position="fixed">
                     <Toolbar className={classes.spacedIcons}>
-                        {navbarProps.routes.map((routes: Routes) => (
+                        {navbarProps.routes.map((route: Routes) => (
+
                             <IconButton color="inherit" edge="end">
-                                <NavLink className={classes.iconLink} to={routes.layout + routes.path}>
-                                    <routes.icon className={classes.icons} />
+                                <NavLink
+                                    // activeClassName={activeRoute(route.layout + route.path) ? "activeIcon" : ""}
+                                    activeStyle={{
+                                        color: '#e25822',
+                                        border: '2px solid #e25822'
+                                    }}
+                                    // eslint-disable-next-line no-restricted-globals
+                                    className={classes.iconLink}
+                                    exact
+                                    key={route.routeId}
+                                    to={route.layout + route.path} >
+                                    <route.icon className={classes.icons} />
                                 </NavLink>
                             </IconButton>
                         ))}
