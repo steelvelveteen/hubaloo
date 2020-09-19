@@ -4,7 +4,7 @@ import VideocamIcon from "@material-ui/icons/Videocam";
 import WavesIcon from "@material-ui/icons/Waves";
 
 import { Routes } from "./types/Routes";
-// import Home from './views/Home/Home';
+import HomePage from './views/HomePage/Home';
 // import Profile from './views/Profile/Profile';
 
 const routes: Routes[] = [
@@ -13,7 +13,7 @@ const routes: Routes[] = [
         path: '/home',
         icon: Home,
         routeName: 'Home',
-        // component: Home,
+        component: HomePage,
         layout: '/mainboard'
     },
     {
@@ -21,7 +21,7 @@ const routes: Routes[] = [
         path: '/user',
         icon: Person,
         routeName: 'Profile',
-        // component: Profile,
+        component: HomePage,
         layout: '/mainboard'
     },
     {
@@ -29,7 +29,7 @@ const routes: Routes[] = [
         path: '/liveCams',
         icon: VideocamIcon,
         routeName: 'Webcams',
-        // component: Home,
+        component: HomePage,
         layout: '/mainboard'
     },
 
@@ -38,7 +38,7 @@ const routes: Routes[] = [
         path: '/events',
         icon: WavesIcon,
         routeName: 'Events',
-        // component: Profile,
+        component: HomePage,
         layout: '/mainboard'
     },
     {
@@ -46,7 +46,7 @@ const routes: Routes[] = [
         path: '/spots',
         icon: WavesIcon,
         routeName: 'Spots',
-        // component: Home,
+        component: HomePage,
         layout: '/mainboard'
     },
 ];
