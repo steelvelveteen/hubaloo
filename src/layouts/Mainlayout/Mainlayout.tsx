@@ -17,7 +17,7 @@ const Mainlayout: React.FC = () => {
         setDrawerToggle(!drawerOpen);
     }
     const resizeFunction = () => {
-        if (window.innerWidth <= 600) {
+        if (window.innerWidth <= 960) {
             setDrawerToggle(false);
         }
     };
