@@ -42,6 +42,10 @@ const Mainlayout: React.FC = () => {
     );
     React.useEffect(() => {
         window.addEventListener('resize', resizeFunction);
+
+        return () => {
+            window.removeEventListener('resize', resizeFunction);
+        }
     });
 
     return (
