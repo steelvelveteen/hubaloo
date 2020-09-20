@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import logo from '../../assets/img/logo2.png';
+import logo from '../../assets/img/habaloo-logo.png';
 import sidebarBgImage from '../../assets/img/sidebar-bg.jpg';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';

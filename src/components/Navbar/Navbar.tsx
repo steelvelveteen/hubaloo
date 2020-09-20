@@ -34,16 +34,12 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
 
     return (
         <>
-
             <AppBar className={classes.navbar}>
                 <Toolbar>
                     <div className={classes.logo}>
                         <NavLink to="/maindboard/home">
                             <img alt="logo" className={classes.img} src={navbarProps.logo} />
                         </NavLink>
-                        <Typography variant="h5">
-                            {navbarProps.brandName} {/** hubaloo */}
-                        </Typography>
                     </div>
                     <Hidden smDown>
                         <Button color="inherit">A better search</Button>
@@ -67,7 +63,6 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
 
                             <IconButton color="inherit" edge="end">
                                 <NavLink
-                                    // activeClassName={activeRoute(route.layout + route.path) ? "activeIcon" : ""}
                                     activeStyle={{
                                         color: flameColor,
                                         border: `2px solid ${flameColor}`

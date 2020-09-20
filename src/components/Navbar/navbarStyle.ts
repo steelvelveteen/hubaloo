@@ -16,7 +16,7 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         zIndex: 4,
     },
     img: {
-        width: '45px',
+        width: '145px',
         height: '28px',
         paddingRight: '25px',
         paddingLeft: '10px',
