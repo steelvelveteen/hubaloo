@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import {
-    AppBar, Button, Hidden, IconButton, Toolbar, Typography
+    AppBar, Button, Hidden, IconButton, Toolbar
 } from '@material-ui/core';
 import Menu from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -36,9 +36,9 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
         <>
             <AppBar className={classes.navbar}>
                 <Toolbar>
-                    <div className={classes.logo}>
+                    <div className={classes.logoContainer}>
                         <NavLink to="/maindboard/home">
-                            <img alt="logo" className={classes.img} src={navbarProps.logo} />
+                            <img alt="logo" className={classes.logoImg} src={navbarProps.logo} />
                         </NavLink>
                     </div>
                     <Hidden smDown>
@@ -48,7 +48,6 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                         <SearchIcon />
                     </IconButton>
                     <Hidden only={["xs", "md", "lg", "xl"]}>
-                        {/* <Hidden mdUp> */}
                         <IconButton color="inherit" edge="end"
                             onClick={navbarProps.handleDrawerToggle}>
                             <Menu />
@@ -60,7 +59,6 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                 <AppBar className={classes.bottomNavBar} position="fixed">
                     <Toolbar className={classes.spacedIcons}>
                         {navbarProps.routes.map((route: Routes) => (
-
                             <IconButton color="inherit" edge="end">
                                 <NavLink
                                     activeStyle={{

@@ -18,23 +18,20 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         height: '100vh',
     },
     content: {
+        [theme.breakpoints.up('sm')]: {
+            marginTop: '1.1rem',
+            padding: '1.5rem 1rem',
+            // width: '90%',
+        },
         [theme.breakpoints.up('md')]: {
             borderLeft: `1px solid ${containerBorderColor}`,
             borderRight: `1px solid ${containerBorderColor}`,
         },
         margin: '1rem auto',
-        // borderLeft: `1px solid ${containerBorderColor}`,
-        // borderRight: `1px solid ${containerBorderColor}`,
-        width: '80%',
         color: 'white',
-        marginTop: '1.1rem',
-        padding: '1.5rem 1rem',
-        // maxHeight: '30%',
-        // height: '100%'
         minHeight: `calc(80% - 70px)`
     },
     container: {
-        // backgroundColor: 'grey',
         paddingRight: '1rem',
         paddingLeft: '1rem',
         marginRight: 'auto',

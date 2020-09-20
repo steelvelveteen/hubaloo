@@ -8,14 +8,14 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         backgroundColor: 'black',
         borderBottom: `1px solid ${iconOutlineColor}`
     },
-    logo: {
+    logoContainer: {
         flex: 1,
         display: 'flex',
         alignItems: 'center',
         position: 'relative' as const,
         zIndex: 4,
     },
-    img: {
+    logoImg: {
         width: '145px',
         height: '28px',
         paddingRight: '25px',
