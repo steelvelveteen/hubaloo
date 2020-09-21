@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { containerBorderColor, drawerWidth, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const mainlayoutStyle = makeStyles((theme: Theme) => ({
     wrapper: {

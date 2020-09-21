@@ -1,8 +1,8 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-import { drawerWidth, flameColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
-const sidebarStyle = makeStyles((theme: Theme) => ({
+const sidebarStyle = makeStyles(() => ({
     drawerPaper: {
         width: drawerWidth,
         border: '0',
@@ -43,7 +43,6 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
     itemText: {
         fontSize: '0.9rem',
         lineHeight: '1.5rem',
-        // fontFamily: 'URW Gothic'
     },
     sidebarWrapper: {
         padding: '10px',
