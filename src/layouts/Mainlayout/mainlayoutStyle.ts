@@ -15,17 +15,11 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         },
         background: mainBackgroundColor,
         width: '100%',
-        height: '100vh',
     },
     content: {
         [theme.breakpoints.up('sm')]: {
             marginTop: '1.1rem',
             padding: '1.5rem 1rem',
-            // width: '90%',
-        },
-        [theme.breakpoints.up('md')]: {
-            // borderLeft: `1px solid ${containerBorderColor}`,
-            // borderRight: `1px solid ${containerBorderColor}`,
         },
         margin: '1rem auto',
         color: 'white',

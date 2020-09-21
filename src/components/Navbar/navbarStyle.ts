@@ -1,20 +1,13 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { iconOutlineColor } from '../../assets/tsstyles/constants';
+import { iconOutlineColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
         position: 'relative' as const,
-        backgroundColor: 'transparent',
+        backgroundColor: mainBackgroundColor,
         borderBottom: `1px solid ${iconOutlineColor}`
     },
-    // logoContainer: {
-    // flex: 1,
-    // display: 'flex',
-    // alignItems: 'center',
-    // position: 'relative' as const,
-    // zIndex: 4,
-    // },
     profileLogoContainer: {
         flex: 1,
         display: 'flex',
@@ -26,8 +19,6 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         width: '35px',
         height: '35px',
         borderRadius: '50%',
-        // paddingRight: '25px',
-        // paddingLeft: '10px',
         position: 'relative' as const,
         top: '2px'
     },
@@ -40,7 +31,7 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         top: '2px'
     },
     bottomNavBar: {
-        backgroundColor: 'transparent',
+        backgroundColor: mainBackgroundColor,
         [theme.breakpoints.down('xs')]: {
             top: 'auto',
             bottom: '0',
@@ -62,11 +53,6 @@ const navbarStyle = makeStyles((theme: Theme) => ({
     icons: {
         fontSize: '22px'
     },
-    // This shit below doesn't want to apply itself!!
-    // activeIcon: {
-    //     color: '#e25822',
-    //     border: '2px solid #e25822'
-    // }
 }));
 
 export default navbarStyle;

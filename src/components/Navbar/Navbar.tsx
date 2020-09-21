@@ -22,17 +22,6 @@ const useStyles = navbarStyle;
 
 const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
     const classes = useStyles();
-    // const activeRoute = (routeName: string): boolean => {
-    //     console.log(routeName);
-    //     return window.location.pathname === routeName
-    // };
-
-    // Code below prints out pathname ex.: /mainboard/profile
-    // const activeRoute = () => console.log(window.location.pathname);
-    // React.useEffect(() => {
-    //     window.addEventListener('load', activeRoute);
-    // });
-
     return (
         <>
             <AppBar className={classes.navbar}>
@@ -45,11 +34,6 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                             <img alt="logo" className={classes.logoImg} src={navbarProps.logo} />
                         </NavLink>
                     </div>
-                    {/* <div className={classes.logoContainer}>
-                        <NavLink to="/mainboard/home">
-                            <img alt="logo" className={classes.logoImg} src={navbarProps.logo} />
-                        </NavLink>
-                    </div> */}
                     <Hidden smDown>
                         <Button color="inherit">A better search</Button>
                     </Hidden>
