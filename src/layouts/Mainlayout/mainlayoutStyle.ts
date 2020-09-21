@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { containerBorderColor, drawerWidth } from '../../assets/tsstyles/constants';
+import { containerBorderColor, drawerWidth, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const mainlayoutStyle = makeStyles((theme: Theme) => ({
     wrapper: {
@@ -13,7 +13,7 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         [theme.breakpoints.up('md')]: {
             width: `calc(100% - ${drawerWidth}px)`,
         },
-        background: 'black',
+        background: mainBackgroundColor,
         width: '100%',
         height: '100vh',
     },
@@ -24,8 +24,8 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
             // width: '90%',
         },
         [theme.breakpoints.up('md')]: {
-            borderLeft: `1px solid ${containerBorderColor}`,
-            borderRight: `1px solid ${containerBorderColor}`,
+            // borderLeft: `1px solid ${containerBorderColor}`,
+            // borderRight: `1px solid ${containerBorderColor}`,
         },
         margin: '1rem auto',
         color: 'white',

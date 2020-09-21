@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import logo from '../../assets/img/habaloo-logo.png';
+import profilePicture from '../../assets/img/profile-picture.jpg';
 import sidebarBgImage from '../../assets/img/sidebar-bg.jpg';
 import Navbar from '../../components/Navbar/Navbar';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -59,6 +60,7 @@ const Mainlayout: React.FC = () => {
                 <Navbar
                     brandName="habaloo"
                     handleDrawerToggle={handleDrawerToggle} logo={logo}
+                    profilePicture={profilePicture}
                     routes={routes} />
                 <div className={classes.content}>
                     <div className={classes.container}>{switchRoutes}</div>

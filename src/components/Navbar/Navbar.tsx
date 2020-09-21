@@ -15,6 +15,7 @@ type NavbarProps = {
     logo: any,
     brandName: string,
     routes: Routes[];
+    profilePicture: string;
     handleDrawerToggle: () => void
 };
 const useStyles = navbarStyle;
@@ -36,11 +37,19 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
         <>
             <AppBar className={classes.navbar}>
                 <Toolbar>
-                    <div className={classes.logoContainer}>
-                        <NavLink to="/maindboard/home">
+                    <div className={classes.profileLogoContainer}>
+                        <NavLink to="/mainboard/profile">
+                            <img alt="profile" className={classes.profileImg} src={navbarProps.profilePicture} />
+                        </NavLink>
+                        <NavLink to="/mainboard/home">
                             <img alt="logo" className={classes.logoImg} src={navbarProps.logo} />
                         </NavLink>
                     </div>
+                    {/* <div className={classes.logoContainer}>
+                        <NavLink to="/mainboard/home">
+                            <img alt="logo" className={classes.logoImg} src={navbarProps.logo} />
+                        </NavLink>
+                    </div> */}
                     <Hidden smDown>
                         <Button color="inherit">A better search</Button>
                     </Hidden>

@@ -1,12 +1,13 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { drawerWidth } from '../../assets/tsstyles/constants';
+import { drawerWidth, flameColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const sidebarStyle = makeStyles((theme: Theme) => ({
     drawerPaper: {
         width: drawerWidth,
         border: '0',
         zIndex: 1,
+        font: 'URW Gothic'
     },
     list: {
         marginTop: '20px',
@@ -23,13 +24,14 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
         display: 'block',
         borderRadius: '3px',
         textDecoration: 'none',
-        '&:hover,&:focus,&:visited,&': {
-            // color: 'white'
+        '&:hover': {
+            backgroundColor: mainBackgroundColor
         }
     },
     itemLink: {
-        display: 'flex',
+        // display: 'flex',
         width: 'auto',
+        height: '100%',
         transition: 'all 300ms linear',
         margin: '10px 15px 0',
         position: 'relative',
@@ -40,6 +42,8 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
     },
     itemText: {
         fontSize: '0.9rem',
+        lineHeight: '1.5rem',
+        // fontFamily: 'URW Gothic'
     },
     sidebarWrapper: {
         padding: '10px',
@@ -68,8 +72,8 @@ const sidebarStyle = makeStyles((theme: Theme) => ({
             height: '100%',
             content: '""',
             display: 'block',
-            background: 'black',
-            opacity: '.9'
+            background: mainBackgroundColor,
+            opacity: '.8'
         }
     }
 }));

@@ -5,26 +5,42 @@ import { iconOutlineColor } from '../../assets/tsstyles/constants';
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
         position: 'relative' as const,
-        backgroundColor: 'black',
+        backgroundColor: 'transparent',
         borderBottom: `1px solid ${iconOutlineColor}`
     },
-    logoContainer: {
+    // logoContainer: {
+    // flex: 1,
+    // display: 'flex',
+    // alignItems: 'center',
+    // position: 'relative' as const,
+    // zIndex: 4,
+    // },
+    profileLogoContainer: {
         flex: 1,
         display: 'flex',
         alignItems: 'center',
         position: 'relative' as const,
-        zIndex: 4,
+        zIndex: 4
+    },
+    profileImg: {
+        width: '35px',
+        height: '35px',
+        borderRadius: '50%',
+        // paddingRight: '25px',
+        // paddingLeft: '10px',
+        position: 'relative' as const,
+        top: '2px'
     },
     logoImg: {
         width: '145px',
         height: '28px',
         paddingRight: '25px',
-        paddingLeft: '10px',
+        paddingLeft: '20px',
         position: 'relative' as const,
         top: '2px'
     },
     bottomNavBar: {
-        backgroundColor: 'black',
+        backgroundColor: 'transparent',
         [theme.breakpoints.down('xs')]: {
             top: 'auto',
             bottom: '0',

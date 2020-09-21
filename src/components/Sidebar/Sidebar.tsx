@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 
+import { flameColor } from '../../assets/tsstyles/constants';
 import { Routes } from '../../types/Routes';
 import sidebarStyle from './sidebarStyle';
 
@@ -27,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
             {routes.map((prop: Routes) => (
                 <NavLink
                     activeStyle={{
-                        backgroundColor: ' #e25822'
+                        backgroundColor: flameColor
                     }}
                     className={classes.item}
                     key={prop.routeId}
