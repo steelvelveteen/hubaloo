@@ -1,12 +1,14 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { iconOutlineColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, iconOutlineColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
-        position: 'relative' as const,
         backgroundColor: mainBackgroundColor,
-        borderBottom: `1px solid ${iconOutlineColor}`
+        borderBottom: `1px solid ${iconOutlineColor}`,
+        [theme.breakpoints.up('lg')]: {
+            width: `calc(100% - ${drawerWidth}px)`,
+        },
     },
     profileLogoContainer: {
         flex: 1,

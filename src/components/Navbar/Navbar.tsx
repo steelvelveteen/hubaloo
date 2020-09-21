@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
     const classes = useStyles();
     return (
         <>
-            <AppBar className={classes.navbar}>
+            <AppBar className={classes.navbar} position="sticky">
                 <Toolbar>
                     <div className={classes.profileLogoContainer}>
                         <NavLink to="/mainboard/profile">
