@@ -7,7 +7,6 @@ const sidebarStyle = makeStyles(() => ({
         width: drawerWidth,
         border: '0',
         zIndex: 1,
-        font: 'URW Gothic'
     },
     list: {
         marginTop: '20px',
@@ -72,7 +71,7 @@ const sidebarStyle = makeStyles(() => ({
             content: '""',
             display: 'block',
             background: mainBackgroundColor,
-            opacity: '.8'
+            opacity: '.9'
         }
     }
 }));

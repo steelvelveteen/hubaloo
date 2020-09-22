@@ -4,10 +4,10 @@ import { drawerWidth, mainBackgroundColor } from '../../assets/tsstyles/constant
 
 const mainlayoutStyle = makeStyles((theme: Theme) => ({
     wrapper: {
+        position: 'relative' as const,
         height: '100vh',
         width: '100%',
-        position: 'relative' as const,
-        top: '0'
+        top: '0',
     },
     mainPanel: {
         [theme.breakpoints.up('md')]: {
@@ -17,19 +17,26 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         width: '100%',
     },
     content: {
-        [theme.breakpoints.up('sm')]: {
-            marginTop: '1.1rem',
-            padding: '1.5rem 1rem',
-        },
-        margin: '1rem auto',
+        padding: '1.5rem 0.5rem',
         color: 'white',
-        minHeight: `calc(80% - 70px)`
+        [theme.breakpoints.up('sm')]: {
+            // marginTop: '1.1rem',
+            // padding: '1.5rem 1rem',
+        },
+        // margin: '1rem auto',
+        // minHeight: `calc(80% - 70px)`,
     },
     container: {
+        [theme.breakpoints.down('xs')]: {
+            // marginTop: '1rem',
+            // padding: '1.5rem 1rem',
+        },
         paddingRight: '1rem',
         paddingLeft: '1rem',
         marginRight: 'auto',
-        marginLeft: 'auto'
+        marginLeft: 'auto',
+        paddingBottom: '1rem'
+
     }
 }));
 

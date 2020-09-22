@@ -6,8 +6,8 @@ const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
         backgroundColor: mainBackgroundColor,
         borderBottom: `1px solid ${iconOutlineColor}`,
-        [theme.breakpoints.up('lg')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
+        [theme.breakpoints.up('xl')]: {
+            // width: `calc(100% - ${drawerWidth}px)`,
         },
     },
     profileLogoContainer: {
