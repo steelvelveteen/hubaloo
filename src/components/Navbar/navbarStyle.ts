@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { drawerWidth, iconOutlineColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { iconOutlineColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
