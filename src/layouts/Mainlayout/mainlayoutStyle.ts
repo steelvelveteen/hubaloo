@@ -15,6 +15,7 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
         },
         background: mainBackgroundColor,
         width: '100%',
+        height: '100%'
     },
     content: {
         padding: '1.5rem 0.5rem',
