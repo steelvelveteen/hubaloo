@@ -8,7 +8,6 @@ import Mainlayout from './layouts/Mainlayout/Mainlayout';
 
 const App: React.FC = () => (
   <div className="App">
-    {/* <Mainlayout /> */}
     <BrowserRouter>
       <Switch>
         <Route component={Mainlayout} path="/mainboard" />
