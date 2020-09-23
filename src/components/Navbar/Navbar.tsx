@@ -52,7 +52,7 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                 <AppBar className={classes.bottomNavBar} position="fixed">
                     <Toolbar className={classes.spacedIcons}>
                         {navbarProps.routes.map((route: Routes) => (
-                            <IconButton color="inherit" edge="end">
+                            <IconButton color="inherit" edge="end" key={route.routeId}>
                                 <NavLink
                                     activeStyle={{
                                         color: flameColor,
@@ -60,7 +60,6 @@ const Navbar: React.FC<NavbarProps> = (navbarProps: NavbarProps) => {
                                     }}
                                     className={classes.iconLink}
                                     exact
-                                    key={route.routeId}
                                     to={route.layout + route.path} >
                                     <route.icon className={classes.icons} />
                                 </NavLink>
