@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AxiosResponse } from 'axios';
 import Axios from 'axios-observable';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 type Post = {
     userId: number;
@@ -18,7 +18,6 @@ const HomePage = (): React.ReactElement => {
         const subscription = Axios.get('https://jsonplaceholder.typicode.com/posts')
             .pipe(
                 map((response: AxiosResponse) => response.data),
-                // filter((x) => x.userId === 1)
             )
             .subscribe((response: Post[]) => {
                 setPosts(response);
