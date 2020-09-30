@@ -29,7 +29,7 @@ const HomePage = (): React.ReactElement => {
     return (
         <div>
             <h3>Inside the home main page</h3>
-            {posts?.map((post: Post) => <div key={post.id}>{post.title}</div>)}
+            { posts && posts.map((post: Post) => <div key={post.id}>{post.title}</div>)}
         </div>
     );
 }
