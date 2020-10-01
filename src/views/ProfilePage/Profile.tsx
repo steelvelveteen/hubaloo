@@ -1,19 +1,29 @@
 import React from 'react';
 
-import { Card, Grid } from '@material-ui/core';
+import { AxiosResponse } from 'axios';
+import { map } from 'rxjs/operators';
+
+import { GetUsers } from '../../services/data.service';
+import { TUser } from '../../types/Types';
 
 const ProfilePage: React.FC = () => {
-    const salutation = 'Member Profile Header';
+    const [users, setUsers] = React.useState<TUser[]>();
+    React.useEffect(() => {
+        const subscription = GetUsers()
+            .pipe(
+                map((response: AxiosResponse) => response.data),
+            )
+            .subscribe((response: TUser[]) => {
+                setUsers(response)
+            });
+
+        return () => subscription.unsubscribe();
+    }, []);
 
     return (
         <>
-            <Grid container>
-                <Grid item xs={12}>
-                    <Card>
-                        {salutation}
-                    </Card>
-                </Grid>
-            </Grid>
+            <h3>Inside the profile page displaying users available from jsonplaceholder.com</h3>
+            { users && users.map((user: TUser) => <div key={user.id}>{user.username}</div>)}
         </>
     );
 };
