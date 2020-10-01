@@ -3,7 +3,6 @@ import React from 'react';
 import landingPageStyle from './landingPageStyle';
 
 const useStyles = landingPageStyle;
-
 const LandingPage: React.FC = () => {
   const classes = useStyles();
   const videoSource = "videos/ocean_wave.mov";
@@ -17,7 +16,7 @@ const LandingPage: React.FC = () => {
       </div>
       <div className={classes.content}>
         <h4>Welcome to habaloo</h4>
-        <a className="btn" href="/mainboard/home">Enter</a>
+        <a className={classes.btn} href="/mainboard/home">Enter</a>
       </div>
     </section >
   );

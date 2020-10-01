@@ -42,6 +42,13 @@ const landingPageStyle = makeStyles(() => ({
         left: '50%',
         transform: `translate(-50%, -50%)`,
         objectFit: 'cover'
+    },
+    btn: {
+        textDecoration: 'none',
+        color: 'white',
+        // border: 'solid 1px white',
+        borderRadius: '5px',
+        padding: '0 5px'
     }
 }));
 
