@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
 import { GetPosts } from '../../services/data.service';
@@ -14,9 +14,14 @@ const HomePage = (): React.ReactElement => {
             .pipe(
                 map((response: AxiosResponse) => response.data),
             )
-            .subscribe((response: TPost[]) => {
-                setPosts(response);
-            });
+            .subscribe(
+                (response: TPost[]) => {
+                    setPosts(response);
+                },
+                ((error: AxiosError) => {
+                    // console.log(error);
+                })
+            );
 
         return () => subscription.unsubscribe();
     }, []);
