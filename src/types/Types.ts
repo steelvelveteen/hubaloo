@@ -28,4 +28,9 @@ type TPost = {
     body: string;
 };
 
-export type { TUser, TPost };
+type TMongoUser = {
+    _id: number;
+    email: string;
+    password: string;
+}
+export type { TUser, TPost, TMongoUser };
