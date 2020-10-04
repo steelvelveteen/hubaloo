@@ -1,4 +1,3 @@
-// import Axios from 'axios-observable';
 import axios, { AxiosResponse } from 'axios';
 import { from, Observable } from 'rxjs';
 

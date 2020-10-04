@@ -8,12 +8,20 @@ import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
 import { Routes } from "./types/Routes";
 import EventsPage from './views/EventsPage/Events';
 import HomePage from './views/HomePage/Home';
+// import LandingPage from './views/LandingPage/Landing';
 import ProfilePage from './views/ProfilePage/Profile';
 import SettingsPage from './views/SettingsPage/Settings';
 import SpotsPage from './views/SpotsPage/Spots';
 import WebcamsPage from './views/WebcamsPage/Webcams';
 
 const routes: Routes[] = [
+    // {
+    //     routeId: 0,
+    //     path: '/landing',
+    //     routeName: 'Landing',
+    //     component: LandingPage,
+    //     layout: '/mainboard'
+    // },
     {
         routeId: 10,
         path: '/home',
