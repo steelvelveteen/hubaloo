@@ -29,7 +29,6 @@ const ProfilePage: React.FC = () => {
                 map((response: AxiosResponse) => response.data.users),
             )
             .subscribe((response: TMongoUser[]) => {
-                console.log(response);
                 setMongoUsers(response)
             });
 
