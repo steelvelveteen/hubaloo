@@ -1,12 +1,24 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { from, Observable } from 'rxjs';
 
-import { TMongoUser, TPost, TUser } from '../types/Types';
+import { TMongoUser, TPost } from '../types/Types';
 
-const GetUsers = (): Observable<AxiosResponse<TUser[]>> => from(axios.get<TUser[]>('https://jsonplaceholder.typicode.com/users'));
+const token = 'eyJhbGciOiJIUzI1NiJ9.am9leXZpY29AZ21haWwuY29t.q3KyV9cSOkoa_JUiCBVDhzTltyA8GWyLC3evK8Ek6gE';
+
+const herokuApiUrl = 'https://stormy-garden-32374.herokuapp.com';
+const localApiUrl = 'http://localhost:4000';
+
+const authAxios: AxiosInstance = axios.create({
+    baseURL: localApiUrl,
+    headers: {
+        Authorization: `Bearer ${token}`,
+    }
+});
 
 const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[]>('https://jsonplaceholder.typicode.com/posts'));
 
-const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(axios.get<TMongoUser[]>('https://stormy-garden-32374.herokuapp.com/users'));
+// const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(axios.get<TMongoUser[]>(`${localApiUrl}/users`));
 
-export { GetUsers, GetPosts, GetUsersFromMyAPI };
+const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
+
+export { GetPosts, GetUsersFromMyAPI };
