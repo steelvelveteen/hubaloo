@@ -19,4 +19,12 @@ const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[
 
 const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
 
-export { GetPosts, GetUsersFromMyAPI };
+type TLoginCredentials = {
+    email: string;
+    password: string;
+};
+
+// eslint-disable-next-line max-len
+const LoginUser = (credentials: TLoginCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${localApiUrl}/login`, credentials));
+
+export { GetPosts, GetUsersFromMyAPI, LoginUser };

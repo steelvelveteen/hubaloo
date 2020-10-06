@@ -24,9 +24,9 @@ const landingPageStyle = makeStyles(() => ({
             height: '100%',
             width: '100%',
             display: 'block',
-            backgroundColor: '#f403fc',
+            backgroundColor: 'black',
             position: 'absolute',
-            opacity: '0.1'
+            opacity: '0.8'
         }
     },
     content: {

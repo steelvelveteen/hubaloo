@@ -1,8 +1,12 @@
 import React from 'react';
 
+import { AxiosResponse } from 'axios';
+import { map } from 'rxjs/operators';
+
+import { LoginUser } from '../../services/data.service';
 import loginFormStyle from './loginFormStyle';
 
-type LoginCredentials = {
+type TLoginCredentials = {
     email: string;
     password: string;
 };
@@ -11,10 +15,9 @@ const registerPromptText = "Don't have an account?";
 const useStyles = loginFormStyle;
 
 const LoginForm: React.FC = () => {
-    const [credentials, setLoginCredentials] = React.useState<LoginCredentials>({ email: '', password: '' });
+    const [credentials, setLoginCredentials] = React.useState<TLoginCredentials>({ email: '', password: '' });
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
-        // console.log(event);
         setLoginCredentials({ ...credentials, email: event.currentTarget.value });
     };
 
@@ -24,7 +27,15 @@ const LoginForm: React.FC = () => {
 
     const loginSubmit = (event: any): void => {
         event.preventDefault();
-        console.log(credentials);
+        const subscription = LoginUser(credentials)
+            .pipe(
+                map(
+                    (response: AxiosResponse) => response.data
+                ),
+            )
+            .subscribe((response) => {
+                console.log(response);
+            })
     }
 
     const classes = useStyles();
