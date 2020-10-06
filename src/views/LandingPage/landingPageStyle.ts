@@ -9,8 +9,6 @@ const landingPageStyle = makeStyles(() => ({
         textAlign: 'center',
         color: '#fff',
         padding: '0 20px',
-        textTransform: 'uppercase',
-        letterSpacing: '1rem'
     },
     videoContainer: {
         position: 'absolute',
@@ -26,13 +24,17 @@ const landingPageStyle = makeStyles(() => ({
             height: '100%',
             width: '100%',
             display: 'block',
-            background: 'black',
+            backgroundColor: '#f403fc',
             position: 'absolute',
-            opacity: '0.8'
+            opacity: '0.1'
         }
     },
     content: {
-        zIndex: 2
+        zIndex: 2,
+    },
+    welcomeTitle: {
+        textTransform: 'uppercase',
+        letterSpacing: '1rem'
     },
     video: {
         minWidth: '100%',
@@ -46,7 +48,6 @@ const landingPageStyle = makeStyles(() => ({
     btn: {
         textDecoration: 'none',
         color: 'white',
-        // border: 'solid 1px white',
         borderRadius: '5px',
         padding: '0 5px'
     }

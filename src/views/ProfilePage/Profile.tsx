@@ -13,14 +13,18 @@ const ProfilePage: React.FC = () => {
     React.useEffect(() => {
         const subscription = GetUsersFromMyAPI()
             .pipe(
-                map((response: AxiosResponse) => response.data.users),
+                map(
+                    (response: AxiosResponse) => response.data.users
+                ),
             )
-            .subscribe((response: TMongoUser[]) => {
-                setMongoUsers(response)
-            },
+            .subscribe(
+                (response: TMongoUser[]) => {
+                    setMongoUsers(response)
+                },
                 (err: any) => {
                     console.log(err);
-                });
+                }
+            );
 
         return () => subscription.unsubscribe();
     }, []);

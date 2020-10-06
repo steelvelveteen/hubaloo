@@ -17,8 +17,6 @@ const authAxios: AxiosInstance = axios.create({
 
 const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[]>('https://jsonplaceholder.typicode.com/posts'));
 
-// const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(axios.get<TMongoUser[]>(`${localApiUrl}/users`));
-
 const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
 
 export { GetPosts, GetUsersFromMyAPI };
