@@ -11,10 +11,10 @@ const dockerlocalApiUrl = 'http://localhost:49160';
 
 // const baseURL = localApiUrl;
 // const baseURL = herokuApiUrl;
-const baseURL = dockerlocalApiUrl;
+const customBaseURL = dockerlocalApiUrl;
 
 const authAxios: AxiosInstance = axios.create({
-    baseURL: herokuApiUrl,
+    baseURL: customBaseURL,
     headers: {
         Authorization: `Bearer ${token}`,
     }
@@ -25,9 +25,9 @@ const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[
 const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
 
 // eslint-disable-next-line max-len
-const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${baseURL}/users/login`, credentials));
+const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${customBaseURL}/users/login`, credentials));
 
-const SignupUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${baseURL}/users/signup`, credentials));
+const SignupUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${customBaseURL}/users/signup`, credentials));
 
 export {
     GetPosts, GetUsersFromMyAPI, LoginUser, SignupUser
