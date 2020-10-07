@@ -20,9 +20,9 @@ const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[
 const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
 
 // eslint-disable-next-line max-len
-const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${localApiUrl}/login`, credentials));
+const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${herokuApiUrl}/login`, credentials));
 
-const SignupUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${localApiUrl}/users/signup`, credentials));
+const SignupUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${herokuApiUrl}/users/signup`, credentials));
 
 export {
     GetPosts, GetUsersFromMyAPI, LoginUser, SignupUser
