@@ -9,5 +9,11 @@ type TMongoUser = {
     _id: number;
     email: string;
     password: string;
-}
-export type { TPost, TMongoUser };
+};
+
+type TCredentials = {
+    email: string;
+    password: string;
+};
+
+export type { TPost, TMongoUser, TCredentials };
