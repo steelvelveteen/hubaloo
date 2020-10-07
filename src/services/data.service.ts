@@ -7,6 +7,7 @@ const token = 'eyJhbGciOiJIUzI1NiJ9.am9leXZpY29AZ21haWwuY29t.q3KyV9cSOkoa_JUiCBV
 
 const herokuApiUrl = 'https://stormy-garden-32374.herokuapp.com';
 const localApiUrl = 'http://localhost:4000';
+const dockerlocalApiUrl = 'http://localhost:49160';
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: herokuApiUrl,
@@ -20,7 +21,7 @@ const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[
 const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
 
 // eslint-disable-next-line max-len
-const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${herokuApiUrl}/login`, credentials));
+const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${herokuApiUrl}/users/login`, credentials));
 
 const SignupUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${herokuApiUrl}/users/signup`, credentials));
 
