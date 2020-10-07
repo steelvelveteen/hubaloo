@@ -22,6 +22,9 @@ const loginFormStyle = makeStyles(() => ({
     },
     btn: {
         padding: '0.5rem 1rem'
+    },
+    errorMessage: {
+        color: 'red'
     }
 
 }));

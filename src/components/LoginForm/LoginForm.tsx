@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 
 import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
@@ -12,18 +13,30 @@ const loginPromptText = "Already have an account? Log in!";
 const useStyles = loginFormStyle;
 
 const LoginForm: React.FC = () => {
+    const classes = useStyles();
     const [credentials, setLoginCredentials] = React.useState<TCredentials>({ email: '', password: '' });
+    const [loginSuccessfull, setLoginSuccessfull] = React.useState<boolean>(false);
+
+    // If signup successfull redirect to complete user info form
+    // const [signupSucessfull, setSignupSuccessfull] = React.useState<boolean>(false);
     const [loginSignupMode, setLoginSingupMode] = React.useState<boolean>(true);
+    const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
+
+    const toggleLoginSignupMode = (): void => {
+        setLoginSingupMode(!loginSignupMode);
+    }
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
+        setLoginFailed(false);
         setLoginCredentials({ ...credentials, email: event.currentTarget.value });
     };
 
     const setPassword = (event: React.FormEvent<HTMLInputElement>) => {
+        setLoginFailed(false);
         setLoginCredentials({ ...credentials, password: event.currentTarget.value });
     };
 
-    const loginSubmit = (event: any): void => {
+    const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
         LoginUser(credentials)
             .pipe(
@@ -31,9 +44,16 @@ const LoginForm: React.FC = () => {
                     (response: AxiosResponse) => response.data
                 ),
             )
-            .subscribe((response) => {
-                console.log(response);
-            })
+            .subscribe(
+                (response: { token: string, email: string }) => {
+                    // Store token and user email
+                    console.log(response);
+                    setLoginSuccessfull(true);
+                },
+                (error: Error) => {
+                    setLoginFailed(true);
+                }
+            )
     }
 
     const signupSubmit = (event: any): void => {
@@ -48,57 +68,54 @@ const LoginForm: React.FC = () => {
                 console.log(response);
             })
     }
-
-    const toggleLoginSignupMode = (): void => {
-        setLoginSingupMode(!loginSignupMode);
-    }
-    const classes = useStyles();
-    if (loginSignupMode) {
-        return (
-            <>
-                <form autoComplete="off" className={classes.form} id="login-submit"
-                    onSubmit={loginSubmit}>
-                    <input className={classes.inputFields}
-                        onChange={setEmail} placeholder="email"
-                        type="text"
-                        value={credentials?.email} />
-                    <input className={classes.inputFields}
-                        onChange={setPassword}
-                        placeholder="password"
-                        type="password" />
-
-                </form>
-                <button className={classes.btn} form="login-submit" type="submit">Login</button>
-                <div className={classes.registerPrompt}>{registerPromptText}
-                </div>
-                <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Sign Up</button>
-
-            </>
-        );
+    if (loginSuccessfull) {
+        return (<Redirect to="/mainboard/home" />);
     }
     return (
         <>
-            <form autoComplete="off" className={classes.form} id="signup-submit"
-                onSubmit={signupSubmit}>
-                <input className={classes.inputFields}
-                    onChange={setEmail} placeholder="email"
-                    type="text"
-                    value={credentials?.email} />
-                <input className={classes.inputFields}
-                    onChange={setPassword}
-                    placeholder="password"
-                    type="password" />
+            { loginSignupMode
 
-            </form>
-            <button className={classes.btn} form="signup-submit" type="submit">Sign Up</button>
-            <div className={classes.registerPrompt}>{loginPromptText}
-            </div>
-            <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Login</button>
+                ? <>
+                    <form autoComplete="off" className={classes.form} id="login-submit"
+                        onSubmit={loginSubmit}>
+                        <input className={classes.inputFields}
+                            onChange={setEmail}
+                            placeholder="email"
+                            type="text"
+                            value={credentials?.email} />
+                        <input className={classes.inputFields}
+                            onChange={setPassword}
+                            placeholder="password"
+                            type="password" />
 
+                    </form>
+                    <button className={classes.btn} form="login-submit" type="submit">Login</button>
+                    { loginFailed && <div className={classes.errorMessage}>The username or password you have entered is invalid. Please try again.</div>}
+                    <div className={classes.registerPrompt}>{registerPromptText}
+                    </div>
+                    <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Sign Up</button>
+                </> : <>
+                    <form autoComplete="off" className={classes.form} id="signup-submit"
+                        onSubmit={signupSubmit}>
+                        <input className={classes.inputFields}
+                            onChange={setEmail} placeholder="email"
+                            type="text"
+                            value={credentials?.email} />
+                        <input className={classes.inputFields}
+                            onChange={setPassword}
+                            placeholder="password"
+                            type="password" />
+
+                    </form>
+                    <button className={classes.btn} form="signup-submit" type="submit">Sign Up</button>
+                    <div className={classes.registerPrompt}>{loginPromptText}
+                    </div>
+                    <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Login</button>
+
+                </>
+            }
         </>
     );
-
-    // return (<div>Register</div>)
 };
 
 export default LoginForm;
