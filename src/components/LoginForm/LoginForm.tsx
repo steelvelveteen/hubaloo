@@ -10,17 +10,24 @@ import loginFormStyle from './loginFormStyle';
 
 const registerPromptText = "Don't have an account?";
 const loginPromptText = "Already have an account? Log in!";
+
 const useStyles = loginFormStyle;
+
+let validationErrorMsg: string[] = [];
 
 const LoginForm: React.FC = () => {
     const classes = useStyles();
+
     const [credentials, setLoginCredentials] = React.useState<TCredentials>({ email: '', password: '' });
+
     const [loginSuccessfull, setLoginSuccessfull] = React.useState<boolean>(false);
 
     // If signup successfull redirect to complete user info form
     // const [signupSucessfull, setSignupSuccessfull] = React.useState<boolean>(false);
     const [loginSignupMode, setLoginSingupMode] = React.useState<boolean>(true);
+
     const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
+    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
 
     const toggleLoginSignupMode = (): void => {
         setLoginSingupMode(!loginSignupMode);
@@ -56,7 +63,8 @@ const LoginForm: React.FC = () => {
             )
     }
 
-    const signupSubmit = (event: any): void => {
+    const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
+        validationErrorMsg = [];
         event.preventDefault();
         SignupUser(credentials)
             .pipe(
@@ -64,10 +72,20 @@ const LoginForm: React.FC = () => {
                     (response: AxiosResponse) => response.data
                 ),
             )
-            .subscribe((response) => {
-                console.log(response);
-            })
+            .subscribe(
+                (response) => {
+                    console.log(response);
+                },
+                (error: any) => {
+                    error.response.data.error.forEach((err: any) => {
+                        validationErrorMsg.push(err.msg);
+                        validationErrorMsg.map((m: string) => console.log(m));
+                    });
+                    setValidationFailed(true);
+                }
+            );
     }
+
     if (loginSuccessfull) {
         return (<Redirect to="/mainboard/home" />);
     }
@@ -90,7 +108,9 @@ const LoginForm: React.FC = () => {
 
                     </form>
                     <button className={classes.btn} form="login-submit" type="submit">Login</button>
+
                     { loginFailed && <div className={classes.errorMessage}>The username or password you have entered is invalid. Please try again.</div>}
+
                     <div className={classes.registerPrompt}>{registerPromptText}
                     </div>
                     <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Sign Up</button>
@@ -108,6 +128,12 @@ const LoginForm: React.FC = () => {
 
                     </form>
                     <button className={classes.btn} form="signup-submit" type="submit">Sign Up</button>
+
+                    { validationFailed && (
+                        validationErrorMsg
+                            .map((msg: string) => <div className={classes.errorMessage}>{msg}</div>)
+                    )}
+
                     <div className={classes.registerPrompt}>{loginPromptText}
                     </div>
                     <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Login</button>
