@@ -9,7 +9,7 @@ import { TCredentials } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
 const registerPromptText = "Don't have an account?";
-const loginPromptText = "Already have an account? Log in!";
+const loginPromptText = "Already have an account?";
 
 const useStyles = loginFormStyle;
 
@@ -30,6 +30,9 @@ const LoginForm: React.FC = () => {
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
 
     const toggleLoginSignupMode = (): void => {
+        setLoginCredentials({ email: '', password: '' });
+        setLoginFailed(false);
+        setValidationFailed(false);
         setLoginSingupMode(!loginSignupMode);
     }
 
@@ -77,13 +80,26 @@ const LoginForm: React.FC = () => {
                     console.log(response);
                 },
                 (error: any) => {
-                    error.response.data.error.forEach((err: any) => {
-                        validationErrorMsg.push(err.msg);
-                        validationErrorMsg.map((m: string) => console.log(m));
-                    });
+                    if (error.response.status === 422) {
+                        error.response.data.error.forEach((err: any) => {
+                            validationErrorMsg.push(err.msg);
+                        });
+                    } else if (error.response.status === 409) {
+                        validationErrorMsg.push(error.response.data.message);
+                    }
+
                     setValidationFailed(true);
                 }
             );
+    }
+
+    const submit = (event: React.SyntheticEvent<EventTarget>): void => {
+        // loginSignupMode ? loginSubmit(event) : signupSubmit(event);
+        if (loginSignupMode) {
+            loginSubmit(event);
+        } else {
+            signupSubmit(event);
+        }
     }
 
     if (loginSuccessfull) {
@@ -91,55 +107,48 @@ const LoginForm: React.FC = () => {
     }
     return (
         <>
-            { loginSignupMode
+            <form autoComplete="off" className={classes.form} id="form-submit"
+                onSubmit={submit}>
+                <input className={classes.inputFields}
+                    onChange={setEmail}
+                    placeholder="email"
+                    type="text"
+                    value={credentials?.email} />
+                <input className={classes.inputFields}
+                    onChange={setPassword}
+                    placeholder="password"
+                    type="password"
+                    value={credentials?.password}
+                />
+            </form>
+            <button className={classes.btn}
+                form="form-submit"
+                type="submit">
+                {loginSignupMode ? "Login" : "Sign Up"}
+            </button>
 
-                ? <>
-                    <form autoComplete="off" className={classes.form} id="login-submit"
-                        onSubmit={loginSubmit}>
-                        <input className={classes.inputFields}
-                            onChange={setEmail}
-                            placeholder="email"
-                            type="text"
-                            value={credentials?.email} />
-                        <input className={classes.inputFields}
-                            onChange={setPassword}
-                            placeholder="password"
-                            type="password" />
-
-                    </form>
-                    <button className={classes.btn} form="login-submit" type="submit">Login</button>
-
-                    { loginFailed && <div className={classes.errorMessage}>The username or password you have entered is invalid. Please try again.</div>}
-
-                    <div className={classes.registerPrompt}>{registerPromptText}
+            { loginSignupMode ? <>
+                { loginFailed
+                    && <div className={classes.errorMessage}>
+                        *The username or password you have entered is invalid. Please try again.
                     </div>
-                    <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Sign Up</button>
-                </> : <>
-                    <form autoComplete="off" className={classes.form} id="signup-submit"
-                        onSubmit={signupSubmit}>
-                        <input className={classes.inputFields}
-                            onChange={setEmail} placeholder="email"
-                            type="text"
-                            value={credentials?.email} />
-                        <input className={classes.inputFields}
-                            onChange={setPassword}
-                            placeholder="password"
-                            type="password" />
-
-                    </form>
-                    <button className={classes.btn} form="signup-submit" type="submit">Sign Up</button>
-
+                }
+            </> : <>
                     { validationFailed && (
                         validationErrorMsg
-                            .map((msg: string) => <div className={classes.errorMessage}>{msg}</div>)
+                            .map((msg: string) => <div className={classes.errorMessage}>
+                                ** {msg}</div>)
                     )}
-
-                    <div className={classes.registerPrompt}>{loginPromptText}
-                    </div>
-                    <button className={classes.btn} onClick={toggleLoginSignupMode} type="button">Login</button>
-
                 </>
             }
+            <div className={classes.prompt}>
+                {loginSignupMode ? (registerPromptText) : (loginPromptText)}
+                <button className={classes.btnAlternative}
+                    onClick={toggleLoginSignupMode}
+                    type="button">
+                    {!loginSignupMode ? "Login" : "Sign Up"}
+                </button>
+            </div>
         </>
     );
 };

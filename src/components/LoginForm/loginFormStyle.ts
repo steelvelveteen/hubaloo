@@ -17,14 +17,30 @@ const loginFormStyle = makeStyles(() => ({
         border: '1px solid white',
         color: 'white'
     },
-    registerPrompt: {
-        margin: '1rem 0',
+    prompt: {
+        margin: '1rem 1rem 1rem 0',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'baseline'
+
     },
     btn: {
-        padding: '0.5rem 1rem'
+        padding: '0.5rem 1rem',
+        cursor: 'pointer'
+    },
+    btnAlternative: {
+        background: 'transparent',
+        border: 'none',
+        color: 'white',
+        marginLeft: '1rem',
+        fontSize: '1rem',
+        outline: 'none',
+        cursor: 'pointer'
+
     },
     errorMessage: {
-        color: 'red'
+        color: '#e83317',
+        fontSize: '0.8rem'
     }
 
 }));
