@@ -8,7 +8,7 @@ import { LoginUser, SignupUser } from '../../services/data.service';
 import { TCredentials } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
-const registerPromptText = "Don't have an account?";
+const signupPromptText = "Don't have an account?";
 const loginPromptText = "Already have an account?";
 
 const useStyles = loginFormStyle;
@@ -55,12 +55,13 @@ const LoginForm: React.FC = () => {
                 ),
             )
             .subscribe(
-                (response: { token: string, email: string }) => {
-                    // Store token and user email
-                    console.log(response);
+                // Store token and user email
+                // console.log(response);
+                // (response: { token: string, email: string }) => {
+                () => {
                     setLoginSuccessfull(true);
                 },
-                (error: Error) => {
+                () => {
                     setLoginFailed(true);
                 }
             )
@@ -111,12 +112,12 @@ const LoginForm: React.FC = () => {
                 onSubmit={submit}>
                 <input className={classes.inputFields}
                     onChange={setEmail}
-                    placeholder="email"
+                    placeholder="Email"
                     type="text"
                     value={credentials?.email} />
                 <input className={classes.inputFields}
                     onChange={setPassword}
-                    placeholder="password"
+                    placeholder="Password"
                     type="password"
                     value={credentials?.password}
                 />
@@ -142,7 +143,7 @@ const LoginForm: React.FC = () => {
                 </>
             }
             <div className={classes.prompt}>
-                {loginSignupMode ? (registerPromptText) : (loginPromptText)}
+                {loginSignupMode ? (signupPromptText) : (loginPromptText)}
                 <button className={classes.btnAlternative}
                     onClick={toggleLoginSignupMode}
                     type="button">
