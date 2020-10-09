@@ -136,7 +136,6 @@ const LoginForm: React.FC = () => {
                     form="form-submit"
                     type="submit">
                     {loginSignupMode ? "Login" : "Sign Up"}
-                    {/* {loadingSpinner ? <span className={classes.spinner}>Spinner....</span> : <div />} */}
                 </button>
             }
             <div className={classes.errorMsgContainer}>

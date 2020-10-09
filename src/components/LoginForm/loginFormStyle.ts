@@ -33,7 +33,7 @@ const loginFormStyle = makeStyles(() => ({
         padding: '0.5rem 0.7rem',
         color: 'white',
         marginLeft: '1rem',
-        fontSize: '0.9rem',
+        fontSize: '0.7rem',
         outline: 'none',
         cursor: 'pointer',
         border: '1px solid white',
