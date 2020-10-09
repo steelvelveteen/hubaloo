@@ -5,7 +5,7 @@ import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
 import { Login, Signup } from '../../services/login-signup.service';
-import { TCredentials } from '../../types/Types';
+import { CredentialsType } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
 const signUpPromptText = "Don't have an account?";
@@ -18,7 +18,7 @@ let validationErrorMsg: string[] = [];
 const LoginForm: React.FC = () => {
     const classes = useStyles();
 
-    const [credentials, setLoginCredentials] = React.useState<TCredentials>({ email: '', password: '' });
+    const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
 
     const [loginSuccessfull, setLoginSuccessfull] = React.useState<boolean>(false);
 

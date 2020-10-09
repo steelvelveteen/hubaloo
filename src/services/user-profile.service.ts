@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 
-import { TUser } from '../types/Types';
+import { UserType } from '../types/Types';
 import * as DataService from './data.service';
 
-const GetAllUsers = (): Observable<AxiosResponse<TUser[]>> => DataService.GetWithAuthorization('/users');
+const GetAllUsers = (): Observable<AxiosResponse<UserType[]>> => DataService.GetWithAuthorization('/users');
 
 export default GetAllUsers;

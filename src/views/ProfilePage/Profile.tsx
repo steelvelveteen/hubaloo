@@ -5,10 +5,10 @@ import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
 import GetAllUsers from '../../services/user-profile.service';
-import { TUser } from '../../types/Types';
+import { UserType } from '../../types/Types';
 
 const ProfilePage: React.FC = () => {
-    const [users, setUsers] = React.useState<TUser[]>();
+    const [users, setUsers] = React.useState<UserType[]>();
 
     React.useEffect(() => {
         const subscription = GetAllUsers()
@@ -18,7 +18,7 @@ const ProfilePage: React.FC = () => {
                 ),
             )
             .subscribe(
-                (response: TUser[]) => {
+                (response: UserType[]) => {
                     setUsers(response)
                 },
                 (err: any) => {
@@ -31,7 +31,7 @@ const ProfilePage: React.FC = () => {
     return (
         <>
             <h3>Users that come from my api Heroku + ATLAS</h3>
-            { users && users.map((user: TUser) => <div key={user._id}>{user.email}</div>)}
+            { users && users.map((user: UserType) => <div key={user._id}>{user.email}</div>)}
         </>
     );
 };

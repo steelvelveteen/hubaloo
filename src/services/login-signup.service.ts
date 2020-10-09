@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 
-import { TCredentials, TUser } from '../types/Types';
+import { CredentialsType, UserType } from '../types/Types';
 import * as DataService from './data.service';
 
-const Login = (credentials: TCredentials): Observable<AxiosResponse<TUser>> => DataService.Post(credentials, '/users/login');
+const Login = (credentials: CredentialsType): Observable<AxiosResponse<UserType>> => DataService.Post(credentials, '/users/login');
 
-const Signup = (credentials: TCredentials): Observable<AxiosResponse<TUser>> => DataService.Post(credentials, '/users/signup');
+const Signup = (credentials: CredentialsType): Observable<AxiosResponse<UserType>> => DataService.Post(credentials, '/users/signup');
 
 export { Login, Signup };

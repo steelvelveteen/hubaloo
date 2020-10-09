@@ -5,15 +5,15 @@ type TPost = {
     body: string;
 };
 
-type TUser = {
+type UserType = {
     _id: number;
     email: string;
     password: string;
 };
 
-type TCredentials = {
+type CredentialsType = {
     email: string;
     password: string;
 };
 
-export type { TPost, TUser, TCredentials };
+export type { TPost, UserType, CredentialsType };
