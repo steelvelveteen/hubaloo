@@ -44,10 +44,9 @@ const loginFormStyle = makeStyles(() => ({
         color: '#e83317',
         fontSize: '0.8rem',
     },
-    emptyBox: {
-        display: 'block',
-        minHeight: '32px',
-        margin: '2rem 0',
+    errorMsgContainer: {
+        minHeight: '3rem',
+        margin: '1rem 0',
     },
     spinner: {
         position: 'absolute',

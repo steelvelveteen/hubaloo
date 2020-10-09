@@ -139,20 +139,27 @@ const LoginForm: React.FC = () => {
                 {loadingSpinner ? <span className={classes.spinner}>Spinner....</span> : <div />}
             </button>
 
-            { loginSignupMode ? <>
-                { loginFailed
-                    && (<div className={classes.errorMessage}>
-                        *The username or password you have entered is invalid. Please try again.
-                    </div>)
+            <div className={classes.errorMsgContainer}>
+                {loginSignupMode ? <>
+                    <div className={classes.errorMessage}>
+                        {loginFailed
+                            && (<p>
+                                *The username or password you have entered is invalid.
+                                <p> Please try again.</p>
+                            </p>)
+                        }
+                    </div>
+                </> : <>
+                        <div className={classes.errorMessage}>
+                            {validationFailed && (
+                                validationErrorMsg
+                                    .map((msg: string) => <p>
+                                        ** {msg}</p>)
+                            )}
+                        </div>
+                    </>
                 }
-            </> : <>
-                    { validationFailed && (
-                        validationErrorMsg
-                            .map((msg: string) => <div className={classes.errorMessage}>
-                                ** {msg}</div>)
-                    )}
-                </>
-            }
+            </div>
             <div className={classes.prompt}>
                 {loginSignupMode ? (signUpPromptText) : (loginPromptText)}
                 <button className={classes.btnAlternative}
