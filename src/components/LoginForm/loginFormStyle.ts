@@ -24,6 +24,7 @@ const loginFormStyle = makeStyles(() => ({
         fontSize: '0.9rem'
     },
     btn: {
+        position: 'relative',
         padding: '0.5rem 1rem',
         cursor: 'pointer'
     },
@@ -37,10 +38,20 @@ const loginFormStyle = makeStyles(() => ({
         cursor: 'pointer',
         border: '1px solid white',
         borderRadius: '5px',
+
     },
     errorMessage: {
         color: '#e83317',
-        fontSize: '0.8rem'
+        fontSize: '0.8rem',
+    },
+    emptyBox: {
+        display: 'block',
+        minHeight: '32px',
+        margin: '2rem 0',
+    },
+    spinner: {
+        position: 'absolute',
+        right: '-1px'
     }
 }));
 

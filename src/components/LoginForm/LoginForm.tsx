@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 
 import { AxiosResponse } from 'axios';
-import { map } from 'rxjs/operators';
+import { map, finalize } from 'rxjs/operators';
 
 import { Login, Signup } from '../../services/login-signup.service';
 import { CredentialsType } from '../../types/Types';
@@ -28,21 +28,27 @@ const LoginForm: React.FC = () => {
 
     const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
+    const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
 
-    const toggleLoginSignupMode = (): void => {
-        setLoginCredentials({ email: '', password: '' });
+    const resetScreen = (): void => {
         setLoginFailed(false);
         setValidationFailed(false);
+        // setLoadingSpinner(false);
+    }
+
+    const toggleLoginSignupMode = (): void => {
+        resetScreen();
+        setLoginCredentials({ email: '', password: '' });
         setLoginSingupMode(!loginSignupMode);
     }
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
-        setLoginFailed(false);
+        resetScreen();
         setLoginCredentials({ ...credentials, email: event.currentTarget.value });
     };
 
     const setPassword = (event: React.FormEvent<HTMLInputElement>) => {
-        setLoginFailed(false);
+        resetScreen();
         setLoginCredentials({ ...credentials, password: event.currentTarget.value });
     };
 
@@ -53,12 +59,14 @@ const LoginForm: React.FC = () => {
                 map(
                     (response: AxiosResponse) => response.data
                 ),
+                finalize(() => setLoadingSpinner(false))
             )
             .subscribe(
                 // Store token and user email
                 // console.log(response);
                 // (response: { token: string, email: string }) => {
                 () => {
+                    // setLoadingSpinner(false);
                     setLoginSuccessfull(true);
                 },
                 () => {
@@ -75,6 +83,7 @@ const LoginForm: React.FC = () => {
                 map(
                     (response: AxiosResponse) => response.data
                 ),
+                finalize(() => setLoadingSpinner(false))
             )
             .subscribe(
                 (response) => {
@@ -96,6 +105,7 @@ const LoginForm: React.FC = () => {
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         // loginSignupMode ? loginSubmit(event) : signupSubmit(event);
+        setLoadingSpinner(true);
         if (loginSignupMode) {
             loginSubmit(event);
         } else {
@@ -126,13 +136,14 @@ const LoginForm: React.FC = () => {
                 form="form-submit"
                 type="submit">
                 {loginSignupMode ? "Login" : "Sign Up"}
+                {loadingSpinner ? <span className={classes.spinner}>Spinner....</span> : <div />}
             </button>
 
             { loginSignupMode ? <>
                 { loginFailed
-                    && <div className={classes.errorMessage}>
+                    && (<div className={classes.errorMessage}>
                         *The username or password you have entered is invalid. Please try again.
-                    </div>
+                    </div>)
                 }
             </> : <>
                     { validationFailed && (
