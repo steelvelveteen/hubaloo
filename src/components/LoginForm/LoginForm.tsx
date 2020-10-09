@@ -4,11 +4,11 @@ import { Redirect } from "react-router-dom";
 import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
-import { Login, Signup } from '../../services/loginSignup.service';
-import { TCredentials, TUser } from '../../types/Types';
+import { Login, Signup } from '../../services/login-signup.service';
+import { TCredentials } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
-const signupPromptText = "Don't have an account?";
+const signUpPromptText = "Don't have an account?";
 const loginPromptText = "Already have an account?";
 
 const useStyles = loginFormStyle;
@@ -143,7 +143,7 @@ const LoginForm: React.FC = () => {
                 </>
             }
             <div className={classes.prompt}>
-                {loginSignupMode ? (signupPromptText) : (loginPromptText)}
+                {loginSignupMode ? (signUpPromptText) : (loginPromptText)}
                 <button className={classes.btnAlternative}
                     onClick={toggleLoginSignupMode}
                     type="button">

@@ -4,14 +4,14 @@ import React from 'react';
 import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
-import { GetUsersFromMyAPI } from '../../services/data.service';
+import GetAllUsers from '../../services/user-profile.service';
 import { TUser } from '../../types/Types';
 
 const ProfilePage: React.FC = () => {
-    const [mongoUsers, setMongoUsers] = React.useState<TUser[]>();
+    const [users, setUsers] = React.useState<TUser[]>();
 
     React.useEffect(() => {
-        const subscription = GetUsersFromMyAPI()
+        const subscription = GetAllUsers()
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data.users
@@ -19,7 +19,7 @@ const ProfilePage: React.FC = () => {
             )
             .subscribe(
                 (response: TUser[]) => {
-                    setMongoUsers(response)
+                    setUsers(response)
                 },
                 (err: any) => {
                     console.log(err);
@@ -30,11 +30,8 @@ const ProfilePage: React.FC = () => {
     }, []);
     return (
         <>
-            {/* <h3>Inside the profile page displaying users available from jsonplaceholder.com</h3>
-            { users && users.map((user: TUser) => <div key={user.id}>{user.username}</div>)} */}
-
             <h3>Users that come from my api Heroku + ATLAS</h3>
-            { mongoUsers && mongoUsers.map((user: TUser) => <div key={user._id}>{user.email}</div>)}
+            { users && users.map((user: TUser) => <div key={user._id}>{user.email}</div>)}
         </>
     );
 };
