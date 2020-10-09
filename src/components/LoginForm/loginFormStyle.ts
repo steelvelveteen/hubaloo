@@ -45,7 +45,7 @@ const loginFormStyle = makeStyles(() => ({
         fontSize: '0.8rem',
     },
     errorMsgContainer: {
-        minHeight: '3rem',
+        minHeight: '3.5rem',
         margin: '1rem 0',
     },
     spinner: {
