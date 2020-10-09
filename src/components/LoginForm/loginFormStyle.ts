@@ -49,8 +49,8 @@ const loginFormStyle = makeStyles(() => ({
         margin: '1rem 0',
     },
     spinner: {
-        position: 'absolute',
-        right: '-1px'
+        color: 'white',
+        // size: '100px'
     }
 }));
 

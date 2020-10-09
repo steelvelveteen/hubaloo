@@ -2,11 +2,13 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 
 import { AxiosResponse } from 'axios';
-import { map, finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import { Login, Signup } from '../../services/login-signup.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
+
+import { CircularProgress } from '@material-ui/core';
 
 const signUpPromptText = "Don't have an account?";
 const loginPromptText = "Already have an account?";
@@ -104,18 +106,14 @@ const LoginForm: React.FC = () => {
     }
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
-        // loginSignupMode ? loginSubmit(event) : signupSubmit(event);
         setLoadingSpinner(true);
-        if (loginSignupMode) {
-            loginSubmit(event);
-        } else {
-            signupSubmit(event);
-        }
+        return loginSignupMode ? loginSubmit(event) : signupSubmit(event);
     }
 
     if (loginSuccessfull) {
         return (<Redirect to="/mainboard/home" />);
     }
+
     return (
         <>
             <form autoComplete="off" className={classes.form} id="form-submit"
@@ -132,13 +130,15 @@ const LoginForm: React.FC = () => {
                     value={credentials?.password}
                 />
             </form>
-            <button className={classes.btn}
-                form="form-submit"
-                type="submit">
-                {loginSignupMode ? "Login" : "Sign Up"}
-                {loadingSpinner ? <span className={classes.spinner}>Spinner....</span> : <div />}
-            </button>
-
+            { loadingSpinner
+                ? <CircularProgress className={classes.spinner} />
+                : <button className={classes.btn}
+                    form="form-submit"
+                    type="submit">
+                    {loginSignupMode ? "Login" : "Sign Up"}
+                    {/* {loadingSpinner ? <span className={classes.spinner}>Spinner....</span> : <div />} */}
+                </button>
+            }
             <div className={classes.errorMsgContainer}>
                 {loginSignupMode ? <>
                     <div className={classes.errorMessage}>
@@ -160,6 +160,7 @@ const LoginForm: React.FC = () => {
                     </>
                 }
             </div>
+
             <div className={classes.prompt}>
                 {loginSignupMode ? (signUpPromptText) : (loginPromptText)}
                 <button className={classes.btnAlternative}
