@@ -5,10 +5,10 @@ import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
 import { GetUsersFromMyAPI } from '../../services/data.service';
-import { TMongoUser } from '../../types/Types';
+import { TUser } from '../../types/Types';
 
 const ProfilePage: React.FC = () => {
-    const [mongoUsers, setMongoUsers] = React.useState<TMongoUser[]>();
+    const [mongoUsers, setMongoUsers] = React.useState<TUser[]>();
 
     React.useEffect(() => {
         const subscription = GetUsersFromMyAPI()
@@ -18,7 +18,7 @@ const ProfilePage: React.FC = () => {
                 ),
             )
             .subscribe(
-                (response: TMongoUser[]) => {
+                (response: TUser[]) => {
                     setMongoUsers(response)
                 },
                 (err: any) => {
@@ -34,7 +34,7 @@ const ProfilePage: React.FC = () => {
             { users && users.map((user: TUser) => <div key={user.id}>{user.username}</div>)} */}
 
             <h3>Users that come from my api Heroku + ATLAS</h3>
-            { mongoUsers && mongoUsers.map((user: TMongoUser) => <div key={user._id}>{user.email}</div>)}
+            { mongoUsers && mongoUsers.map((user: TUser) => <div key={user._id}>{user.email}</div>)}
         </>
     );
 };

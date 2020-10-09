@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { from, Observable } from 'rxjs';
 
-import { TCredentials, TMongoUser, TPost } from '../types/Types';
+import { TPost, TUser } from '../types/Types';
 
 const token = 'eyJhbGciOiJIUzI1NiJ9.am9leXZpY29AZ21haWwuY29t.q3KyV9cSOkoa_JUiCBVDhzTltyA8GWyLC3evK8Ek6gE';
 
@@ -11,7 +11,7 @@ const dockerlocalApiUrl = 'http://localhost:49160';
 
 // const baseURL = localApiUrl;
 // const baseURL = herokuApiUrl;
-const customBaseURL = dockerlocalApiUrl;
+const customBaseURL = localApiUrl;
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: customBaseURL,
@@ -22,13 +22,11 @@ const authAxios: AxiosInstance = axios.create({
 
 const GetPosts = (): Observable<AxiosResponse<TPost[]>> => from(axios.get<TPost[]>('https://jsonplaceholder.typicode.com/posts'));
 
-const GetUsersFromMyAPI = (): Observable<AxiosResponse<TMongoUser[]>> => from(authAxios.get<TMongoUser[]>('/users'));
+const GetUsersFromMyAPI = (): Observable<AxiosResponse<TUser[]>> => from(authAxios.get<TUser[]>('/users'));
 
-// eslint-disable-next-line max-len
-const LoginUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${customBaseURL}/users/login`, credentials));
-
-const SignupUser = (credentials: TCredentials): Observable<AxiosResponse<TMongoUser>> => from(axios.post<TMongoUser>(`${customBaseURL}/users/signup`, credentials));
+const Post = <T, V>(body: T, url: string): Observable<AxiosResponse<V>> => from(axios.post<V>(`${customBaseURL}${url}`, body));
+const Get = <T, V>(body: T, url: string): Observable<AxiosResponse<V>> => from(axios.post<V>(`${customBaseURL}${url}`));
 
 export {
-    GetPosts, GetUsersFromMyAPI, LoginUser, SignupUser
+    GetPosts, GetUsersFromMyAPI, Post, Get
 };

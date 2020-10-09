@@ -5,7 +5,7 @@ type TPost = {
     body: string;
 };
 
-type TMongoUser = {
+type TUser = {
     _id: number;
     email: string;
     password: string;
@@ -16,4 +16,4 @@ type TCredentials = {
     password: string;
 };
 
-export type { TPost, TMongoUser, TCredentials };
+export type { TPost, TUser, TCredentials };

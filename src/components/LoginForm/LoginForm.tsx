@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 import { AxiosResponse } from 'axios';
 import { map } from 'rxjs/operators';
 
-import { LoginUser, SignupUser } from '../../services/data.service';
-import { TCredentials } from '../../types/Types';
+import { Login, Signup } from '../../services/loginSignup.service';
+import { TCredentials, TUser } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
 const signupPromptText = "Don't have an account?";
@@ -48,7 +48,7 @@ const LoginForm: React.FC = () => {
 
     const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        LoginUser(credentials)
+        Login(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -70,7 +70,7 @@ const LoginForm: React.FC = () => {
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         validationErrorMsg = [];
         event.preventDefault();
-        SignupUser(credentials)
+        Signup(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
