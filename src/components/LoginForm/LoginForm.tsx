@@ -3,14 +3,10 @@ import { Redirect } from "react-router-dom";
 
 import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
-import { Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-
-
 import { Login, Signup } from '../../services/login-signup.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
-
 
 const signUpPromptText = "Don't have an account?";
 const loginPromptText = "Already have an account?";
@@ -18,7 +14,6 @@ const loginPromptText = "Already have an account?";
 const useStyles = loginFormStyle;
 
 let validationErrorMsg: string[] = [];
-let subscription: Subscription = new Subscription();
 
 const LoginForm: React.FC = () => {
     const classes = useStyles();
@@ -38,7 +33,6 @@ const LoginForm: React.FC = () => {
     const resetScreen = (): void => {
         setLoginFailed(false);
         setValidationFailed(false);
-        // setLoadingSpinner(false);
     }
 
     const toggleLoginSignupMode = (): void => {
@@ -59,7 +53,7 @@ const LoginForm: React.FC = () => {
 
     const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        subscription = Login(credentials)
+        Login(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -68,10 +62,8 @@ const LoginForm: React.FC = () => {
             )
             .subscribe(
                 // Store token and user email
-                // console.log(response);
                 // (response: { token: string, email: string }) => {
                 () => {
-                    // setLoadingSpinner(false);
                     setLoginSuccessfull(true);
                 },
                 () => {
@@ -83,7 +75,7 @@ const LoginForm: React.FC = () => {
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         validationErrorMsg = [];
         event.preventDefault();
-        subscription = Signup(credentials)
+        Signup(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -92,12 +84,11 @@ const LoginForm: React.FC = () => {
             )
             .subscribe(
                 (response) => {
-                    console.log(response);
+                    // console.log(response);
                     setLoginSuccessfull(true);
                 },
                 (error: any) => {
                     if (error.response.status === 422) {
-                        console.log(error.response);
                         error.response.data.error.forEach((err: any) => {
                             validationErrorMsg.push(err.msg);
                         });
