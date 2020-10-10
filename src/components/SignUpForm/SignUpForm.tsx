@@ -19,17 +19,25 @@ type SignUpProps = {
     toggleMode: () => void;
 }
 
+type SignUpCredentials = {
+    credentials: CredentialsType,
+    confirmPassword: string
+}
+
 const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const classes = useStyles();
+    const confirmPasswordRef: React.RefObject<HTMLInputElement> = React.createRef();
 
     const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
     // If signup successfull redirect to complete user info form
     // const [signupSucessfull, setSignupSuccessfull] = React.useState<boolean>(false);
 
     const resetScreen = (): void => {
         setValidationFailed(false);
+        setPasswordMismatch(false);
     }
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
@@ -64,15 +72,18 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                     } else if (error.response.status === 409) {
                         validationErrorMsg.push(error.response.data.message);
                     }
-
                     setValidationFailed(true);
                 }
             );
     }
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
-        setLoadingSpinner(true);
-        return signupSubmit(event);
+        event.preventDefault();
+        if (confirmPasswordRef?.current?.value === credentials.password) {
+            setLoadingSpinner(true);
+            return signupSubmit(event);
+        }
+        setPasswordMismatch(true);
     }
 
     // If signup successfull redirect to complete user info form
@@ -95,6 +106,13 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                     type="password"
                     value={credentials?.password}
                 />
+                <input className={classes.inputFields}
+                    onChange={resetScreen}
+                    placeholder="Confirm Password"
+                    ref={confirmPasswordRef}
+                    type="password"
+                // value={credentials?.password}
+                />
             </form>
             { loadingSpinner
                 ? <CircularProgress className={classes.spinner} />
@@ -110,9 +128,9 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                         validationErrorMsg
                             .map((msg: string) => <p key={msg.length}>** {msg}</p>)
                     )}
+                    {passwordMismatch && <p>***Passwords do not match</p>}
                 </div>
             </div>
-
             <div className={classes.prompt}>
                 {loginPromptText}
                 <button className={classes.btnAlternative}

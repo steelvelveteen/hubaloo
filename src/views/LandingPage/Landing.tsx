@@ -4,11 +4,11 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import landingPageStyle from './landingPageStyle';
 
-
 const useStyles = landingPageStyle;
 
 const LandingPage: React.FC = () => {
   const classes = useStyles();
+  const videoSource = "videos/ocean_wave.mov";
 
   const [loginMode, setLoginMode] = React.useState<boolean>(true);
 
@@ -16,7 +16,6 @@ const LandingPage: React.FC = () => {
     setLoginMode(!loginMode);
   }
 
-  const videoSource = "videos/ocean_wave.mov";
   return (
     <>
       <div className={classes.showcase}>

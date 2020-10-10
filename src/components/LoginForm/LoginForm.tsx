@@ -21,10 +21,11 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const classes = useStyles();
 
     const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
-    const [loginSuccessfull, setLoginSuccessfull] = React.useState<boolean>(false);
+    const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
     const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
 
+    // const emailInput: RefObject<HTMLInputElement> = React.createRef();
     const resetScreen = (): void => {
         setLoginFailed(false);
     }
@@ -39,6 +40,13 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
         setLoginCredentials({ ...credentials, password: event.currentTarget.value });
     };
 
+    type LoginResponseType = {
+        message: string,
+        user_id: string,
+        email: string,
+        token: string
+    };
+
     const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
         Login(credentials)
@@ -49,12 +57,14 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 finalize(() => setLoadingSpinner(false))
             )
             .subscribe(
-                // Store token and user email
+                // Store token and user id, email localStorage
                 // (response: { token: string, email: string }) => {
-                () => {
-                    setLoginSuccessfull(true);
+                (response: LoginResponseType) => {
+                    console.log(response);
+                    setLoginSuccess(true);
                 },
-                () => {
+                (error: any) => {
+                    console.log(error.response);
                     setLoginFailed(true);
                 }
             )
@@ -65,9 +75,15 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
         return loginSubmit(event);
     }
 
-    if (loginSuccessfull) {
+    if (loginSuccess) {
         return (<Redirect to="/mainboard/home" />);
     }
+
+    // React.useEffect(() => {
+    //     const subscription = new Subscription();
+
+    //     return () => subscription.unsubscribe();
+    // });
 
     return (
         <>
@@ -76,6 +92,7 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 <input className={classes.inputFields}
                     onChange={setEmail}
                     placeholder="Email"
+                    // ref={emailInput}
                     type="text"
                     value={credentials?.email} />
                 <input className={classes.inputFields}

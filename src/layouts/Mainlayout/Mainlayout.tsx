@@ -13,8 +13,9 @@ import mainlayoutStyle from './mainlayoutStyle';
 const useStyles = mainlayoutStyle;
 
 const Mainlayout: React.FC = () => {
-    const [drawerOpen, setDrawerToggle] = React.useState(false);
     const classes = useStyles();
+
+    const [drawerOpen, setDrawerToggle] = React.useState(false);
 
     const handleDrawerToggle = (): void => {
         setDrawerToggle(!drawerOpen);
