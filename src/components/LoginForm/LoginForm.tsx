@@ -1,14 +1,16 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
 
+import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
+import { Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
+
 
 import { Login, Signup } from '../../services/login-signup.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
-import { CircularProgress } from '@material-ui/core';
 
 const signUpPromptText = "Don't have an account?";
 const loginPromptText = "Already have an account?";
@@ -16,6 +18,7 @@ const loginPromptText = "Already have an account?";
 const useStyles = loginFormStyle;
 
 let validationErrorMsg: string[] = [];
+let subscription: Subscription = new Subscription();
 
 const LoginForm: React.FC = () => {
     const classes = useStyles();
@@ -56,7 +59,7 @@ const LoginForm: React.FC = () => {
 
     const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        Login(credentials)
+        subscription = Login(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -80,7 +83,7 @@ const LoginForm: React.FC = () => {
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         validationErrorMsg = [];
         event.preventDefault();
-        Signup(credentials)
+        subscription = Signup(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -90,9 +93,11 @@ const LoginForm: React.FC = () => {
             .subscribe(
                 (response) => {
                     console.log(response);
+                    setLoginSuccessfull(true);
                 },
                 (error: any) => {
                     if (error.response.status === 422) {
+                        console.log(error.response);
                         error.response.data.error.forEach((err: any) => {
                             validationErrorMsg.push(err.msg);
                         });
@@ -109,6 +114,8 @@ const LoginForm: React.FC = () => {
         setLoadingSpinner(true);
         return loginSignupMode ? loginSubmit(event) : signupSubmit(event);
     }
+
+    // React.useEffect(() => () => subscription.unsubscribe());
 
     if (loginSuccessfull) {
         return (<Redirect to="/mainboard/home" />);
@@ -142,18 +149,15 @@ const LoginForm: React.FC = () => {
                 {loginSignupMode ? <>
                     <div className={classes.errorMessage}>
                         {loginFailed
-                            && (<p>
-                                *The username or password you have entered is invalid.
-                                <p> Please try again.</p>
-                            </p>)
+                            && (<p>*The username or password you have entered is invalid.
+                                <br /> Please try again.</p>)
                         }
                     </div>
                 </> : <>
                         <div className={classes.errorMessage}>
                             {validationFailed && (
                                 validationErrorMsg
-                                    .map((msg: string) => <p>
-                                        ** {msg}</p>)
+                                    .map((msg: string) => <p key={msg.length}>** {msg}</p>)
                             )}
                         </div>
                     </>
