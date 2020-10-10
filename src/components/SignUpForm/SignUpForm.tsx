@@ -1,32 +1,35 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import { Login } from '../../services/login-signup.service';
+import { Signup } from '../../services/login-signup.service';
 import { CredentialsType } from '../../types/Types';
-import loginFormStyle from './loginFormStyle';
+import loginFormStyle from '../LoginForm/loginFormStyle';
 
-const signUpPromptText = "Don't have an account?";
+const loginPromptText = "Already have an account?";
 
 const useStyles = loginFormStyle;
 
-type LoginProps = {
+let validationErrorMsg: string[] = [];
+
+type SignUpProps = {
     toggleMode: () => void;
 }
 
-const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
+const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const classes = useStyles();
 
     const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
-    const [loginSuccessfull, setLoginSuccessfull] = React.useState<boolean>(false);
-    const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
+    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    // If signup successfull redirect to complete user info form
+    // const [signupSucessfull, setSignupSuccessfull] = React.useState<boolean>(false);
 
     const resetScreen = (): void => {
-        setLoginFailed(false);
+        setValidationFailed(false);
     }
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
@@ -39,9 +42,10 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
         setLoginCredentials({ ...credentials, password: event.currentTarget.value });
     };
 
-    const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
+    const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
+        validationErrorMsg = [];
         event.preventDefault();
-        Login(credentials)
+        Signup(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -49,25 +53,32 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 finalize(() => setLoadingSpinner(false))
             )
             .subscribe(
-                // Store token and user email
-                // (response: { token: string, email: string }) => {
-                () => {
-                    setLoginSuccessfull(true);
+                (response) => {
+                    console.log(response);
                 },
-                () => {
-                    setLoginFailed(true);
+                (error: any) => {
+                    if (error.response.status === 422) {
+                        error.response.data.error.forEach((err: any) => {
+                            validationErrorMsg.push(err.msg);
+                        });
+                    } else if (error.response.status === 409) {
+                        validationErrorMsg.push(error.response.data.message);
+                    }
+
+                    setValidationFailed(true);
                 }
-            )
+            );
     }
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         setLoadingSpinner(true);
-        return loginSubmit(event);
+        return signupSubmit(event);
     }
 
-    if (loginSuccessfull) {
-        return (<Redirect to="/mainboard/home" />);
-    }
+    // If signup successfull redirect to complete user info form
+    // if (signUpSuccessfull) {
+    //     return (<Redirect to="/mainboard/home" />);
+    // }
 
     return (
         <>
@@ -90,27 +101,28 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 : <button className={classes.btn}
                     form="form-submit"
                     type="submit">
-                    Login
+                    Sign Up
                 </button>
             }
             <div className={classes.errorMsgContainer}>
                 <div className={classes.errorMessage}>
-                    {loginFailed
-                        && (<p>*The username or password you have entered is invalid.
-                            <br /> Please try again.</p>)
-                    }
+                    {validationFailed && (
+                        validationErrorMsg
+                            .map((msg: string) => <p key={msg.length}>** {msg}</p>)
+                    )}
                 </div>
             </div>
+
             <div className={classes.prompt}>
-                {signUpPromptText}
+                {loginPromptText}
                 <button className={classes.btnAlternative}
-                    onClick={loginProps.toggleMode}
+                    onClick={signUpProps.toggleMode}
                     type="button">
-                    Sign Up
+                    Login
                 </button>
             </div>
         </>
     );
 };
 
-export default LoginForm;
+export default SignUpForm;
