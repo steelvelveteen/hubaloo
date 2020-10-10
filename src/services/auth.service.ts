@@ -6,6 +6,6 @@ import * as DataService from './data.service';
 
 const Login = (credentials: CredentialsType): Observable<AxiosResponse<UserType>> => DataService.Post(credentials, '/auth/login');
 
-const Signup = (credentials: CredentialsType): Observable<AxiosResponse<UserType>> => DataService.Post(credentials, '/auth/signup');
+const SignUp = (credentials: CredentialsType): Observable<AxiosResponse<UserType>> => DataService.Post(credentials, '/auth/signup');
 
-export { Login, Signup };
+export { Login, SignUp };

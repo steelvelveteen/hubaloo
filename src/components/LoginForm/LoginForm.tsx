@@ -5,7 +5,7 @@ import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import { Login } from '../../services/login-signup.service';
+import { Login } from '../../services/auth.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 

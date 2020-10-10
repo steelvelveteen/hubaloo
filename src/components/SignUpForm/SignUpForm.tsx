@@ -5,7 +5,7 @@ import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import { Signup } from '../../services/login-signup.service';
+import { SignUp } from '../../services/auth.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from '../LoginForm/loginFormStyle';
 
@@ -53,7 +53,7 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         validationErrorMsg = [];
         event.preventDefault();
-        Signup(credentials)
+        SignUp(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
