@@ -16,12 +16,17 @@ const loginFormStyle = makeStyles(() => ({
         background: 'transparent',
         color: 'white'
     },
-    prompt: {
+    promptContainer: {
         margin: '1rem 1rem 1rem 0',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'baseline',
+        alignItems: 'center',
+        // alignItems: 'baseline',
         fontSize: '0.9rem'
+    },
+    promptUnit: {
+        marginBottom: '1rem'
     },
     btn: {
         position: 'relative',
@@ -38,7 +43,7 @@ const loginFormStyle = makeStyles(() => ({
         cursor: 'pointer',
         border: '1px solid white',
         borderRadius: '5px',
-
+        marginTop: '0.5rem'
     },
     errorMessage: {
         color: '#e83317',

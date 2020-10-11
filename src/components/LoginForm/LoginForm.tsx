@@ -5,13 +5,16 @@ import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import { Login } from '../../services/auth.service';
+import * as AuthService from '../../services/auth.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from './loginFormStyle';
 
 const signUpPromptText = "Don't have an account?";
+const passwordResetPromptText = "Forgot your password?";
 
 const useStyles = loginFormStyle;
+
+let validationErrorMsg: string[] = [];
 
 type LoginProps = {
     toggleMode: () => void;
@@ -24,10 +27,11 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
     const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
 
-    // const emailInput: RefObject<HTMLInputElement> = React.createRef();
     const resetScreen = (): void => {
         setLoginFailed(false);
+        setValidationFailed(false);
     }
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
@@ -49,7 +53,7 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
 
     const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        Login(credentials)
+        AuthService.Login(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -71,19 +75,26 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     }
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
+        event.preventDefault();
+        if (AuthService.validateEmail(credentials.email) === null) {
+            validationErrorMsg = [];
+            validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
+            setValidationFailed(true);
+            return;
+        }
+        if (!AuthService.validatePassword(credentials.password)) {
+            validationErrorMsg = [];
+            validationErrorMsg = [...validationErrorMsg, "You must provide your password for logging in"];
+            setValidationFailed(true);
+            return;
+        }
         setLoadingSpinner(true);
-        return loginSubmit(event);
+        loginSubmit(event);
     }
 
     if (loginSuccess) {
         return (<Redirect to="/mainboard/home" />);
     }
-
-    // React.useEffect(() => {
-    //     const subscription = new Subscription();
-
-    //     return () => subscription.unsubscribe();
-    // });
 
     return (
         <>
@@ -92,7 +103,6 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 <input className={classes.inputFields}
                     onChange={setEmail}
                     placeholder="Email"
-                    // ref={emailInput}
                     type="text"
                     value={credentials?.email} />
                 <input className={classes.inputFields}
@@ -116,15 +126,29 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                         && (<p>*The username or password you have entered is invalid.
                             <br /> Please try again.</p>)
                     }
+                    {validationFailed && (
+                        validationErrorMsg
+                            .map((msg: string) => <p key={msg.length}>** {msg}</p>)
+                    )}
                 </div>
             </div>
-            <div className={classes.prompt}>
-                {signUpPromptText}
-                <button className={classes.btnAlternative}
-                    onClick={loginProps.toggleMode}
-                    type="button">
-                    Sign Up
-                </button>
+            <div className={classes.promptContainer}>
+                <div className={classes.promptUnit}>
+                    <span>{signUpPromptText}</span>
+                    <button className={classes.btnAlternative}
+                        onClick={loginProps.toggleMode}
+                        type="button">
+                        Sign Up
+                    </button>
+                </div>
+                <div className={classes.promptUnit}>
+                    <span>{passwordResetPromptText}</span>
+                    <button className={classes.btnAlternative}
+                        onClick={loginProps.toggleMode}
+                        type="button">
+                        Reset password
+                    </button>
+                </div>
             </div>
         </>
     );

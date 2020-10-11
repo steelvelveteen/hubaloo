@@ -86,7 +86,6 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
             setValidationFailed(true);
             return;
         }
-        ;
         if (confirmPasswordRef?.current?.value !== credentials.password) {
             setPasswordMismatch(true);
             return;
@@ -139,7 +138,7 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                     {passwordMismatch && <p>***Passwords do not match</p>}
                 </div>
             </div>
-            <div className={classes.prompt}>
+            <div className={classes.promptContainer}>
                 {loginPromptText}
                 <button className={classes.btnAlternative}
                     onClick={signUpProps.toggleMode}
