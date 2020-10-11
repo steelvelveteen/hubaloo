@@ -9,7 +9,7 @@ const herokuApiUrl = 'https://stormy-garden-32374.herokuapp.com';
 const localApiUrl = 'http://localhost:8080';
 const dockerlocalApiUrl = 'http://localhost:49160';
 
-const customBaseURL = localApiUrl;
+const customBaseURL = herokuApiUrl;
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: customBaseURL,
