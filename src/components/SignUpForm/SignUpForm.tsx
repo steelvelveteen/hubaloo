@@ -23,7 +23,7 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const classes = useStyles();
     const confirmPasswordRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-    const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
+    const [credentials, setSignUpCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
@@ -37,12 +37,12 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
         resetScreen();
-        setLoginCredentials({ ...credentials, email: event.currentTarget.value });
+        setSignUpCredentials({ ...credentials, email: event.currentTarget.value });
     };
 
     const setPassword = (event: React.FormEvent<HTMLInputElement>) => {
         resetScreen();
-        setLoginCredentials({ ...credentials, password: event.currentTarget.value });
+        setSignUpCredentials({ ...credentials, password: event.currentTarget.value });
     };
 
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {

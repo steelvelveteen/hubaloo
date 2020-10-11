@@ -59,13 +59,13 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                     console.log(response);
                 },
                 (error: any) => {
-                    // if (error.response.status === 422) {
-                    //     error.response.data.error.forEach((err: any) => {
-                    //         validationErrorMsg.push(err.msg);
-                    //     });
-                    // } else if (error.response.status === 409) {
-                    //     validationErrorMsg.push(error.response.data.message);
-                    // }
+                    if (error.response.status === 422) {
+                        error.response.data.error.forEach((err: any) => {
+                            validationErrorMsg.push(err.msg);
+                        });
+                    } else if (error.response.status === 409) {
+                        validationErrorMsg.push(error.response.data.message);
+                    }
                     setValidationFailed(true);
                 }
             );

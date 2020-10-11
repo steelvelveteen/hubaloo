@@ -21,6 +21,11 @@ type LoginProps = {
     togglePasswordResetMode?: () => void;
 }
 
+type LoginFailureType = {
+    hasFailed: boolean,
+    message: string[],
+}
+
 const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const classes = useStyles();
 
@@ -29,11 +34,11 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
 
     const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
-    const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
+    const [loginFailure, setLoginFailure] = React.useState<LoginFailureType>({ hasFailed: false, message: [''] });
 
 
     const resetScreen = (): void => {
-        setLoginFailed(false);
+        setLoginFailure({ hasFailed: false, message: [''] });
         setValidationFailed(false);
     }
 
@@ -71,8 +76,10 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                     setLoginSuccess(true);
                 },
                 (error: any) => {
-                    console.log(error.response);
-                    setLoginFailed(true);
+                    setLoginFailure({
+                        hasFailed: true,
+                        message: error.response.data.message
+                    });
                 }
             )
     }
@@ -125,9 +132,9 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
             }
             <div className={classes.errorMsgContainer}>
                 <div className={classes.errorMessage}>
-                    {loginFailed
-                        && (<p>*The username or password you have entered is invalid.
-                            <br /> Please try again.</p>)
+                    {loginFailure.hasFailed
+                        && (loginFailure.message
+                            .map((msg: string) => <p key={msg.length}>** {msg}</p>))
                     }
                     {validationFailed && (
                         validationErrorMsg
