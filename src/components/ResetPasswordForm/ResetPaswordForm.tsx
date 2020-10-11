@@ -1,38 +1,35 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
-import { CredentialsType } from '../../types/Types';
-import loginFormStyle from './loginFormStyle';
-
-const signUpPromptText = "Don't have an account?";
-const passwordResetPromptText = "Forgot your password?";
+import { ResetCredentialsType } from '../../types/Types';
+import loginFormStyle from '../LoginForm/loginFormStyle';
 
 const useStyles = loginFormStyle;
 
 let validationErrorMsg: string[] = [];
 
-type LoginProps = {
-    toggleMode: () => void;
-    togglePasswordResetMode?: () => void;
+type ResetPasswordProps = {
+    toggleMode?: () => void;
+    togglePasswordResetMode: () => void;
 }
 
-const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
+const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswordProps) => {
     const classes = useStyles();
+    const confirmPasswordRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-    const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
-    const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
-    const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
-    const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    const [credentials, setLoginCredentials] = React.useState<ResetCredentialsType>({ email: '', newPassword: '' });
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
+    const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
 
     const resetScreen = (): void => {
-        setLoginFailed(false);
         setValidationFailed(false);
+        setPasswordMismatch(false);
     }
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
@@ -42,19 +39,14 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
 
     const setPassword = (event: React.FormEvent<HTMLInputElement>) => {
         resetScreen();
-        setLoginCredentials({ ...credentials, password: event.currentTarget.value });
+        setLoginCredentials({ ...credentials, newPassword: event.currentTarget.value });
     };
 
-    type LoginResponseType = {
-        message: string,
-        user_id: string,
-        email: string,
-        token: string
-    };
-
-    const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
+    const resetPasswordSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
+        console.log(credentials);
+        validationErrorMsg = [];
         event.preventDefault();
-        AuthService.Login(credentials)
+        AuthService.ResetPassword(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -62,17 +54,20 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 finalize(() => setLoadingSpinner(false))
             )
             .subscribe(
-                // Store token and user id, email localStorage
-                // (response: { token: string, email: string }) => {
-                (response: LoginResponseType) => {
+                (response) => {
                     console.log(response);
-                    setLoginSuccess(true);
                 },
                 (error: any) => {
-                    console.log(error.response);
-                    setLoginFailed(true);
+                    // if (error.response.status === 422) {
+                    //     error.response.data.error.forEach((err: any) => {
+                    //         validationErrorMsg.push(err.msg);
+                    //     });
+                    // } else if (error.response.status === 409) {
+                    //     validationErrorMsg.push(error.response.data.message);
+                    // }
+                    setValidationFailed(true);
                 }
-            )
+            );
     }
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
@@ -83,18 +78,18 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
             setValidationFailed(true);
             return;
         }
-        if (!AuthService.validatePassword(credentials.password)) {
+        if (!AuthService.validatePassword(credentials.newPassword)) {
             validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "You must provide your password for logging in"];
+            validationErrorMsg = [...validationErrorMsg, "Your password must be at least 8 characters long"];
             setValidationFailed(true);
             return;
         }
+        if (confirmPasswordRef?.current?.value !== credentials.newPassword) {
+            setPasswordMismatch(true);
+            return;
+        }
         setLoadingSpinner(true);
-        loginSubmit(event);
-    }
-
-    if (loginSuccess) {
-        return (<Redirect to="/mainboard/home" />);
+        resetPasswordSubmit(event);
     }
 
     return (
@@ -103,14 +98,20 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 onSubmit={submit}>
                 <input className={classes.inputFields}
                     onChange={setEmail}
-                    placeholder="Email"
+                    placeholder="Your current email"
                     type="text"
                     value={credentials?.email} />
                 <input className={classes.inputFields}
                     onChange={setPassword}
-                    placeholder="Password"
+                    placeholder="Enter new password"
                     type="password"
-                    value={credentials?.password}
+                    value={credentials?.newPassword}
+                />
+                <input className={classes.inputFields}
+                    onChange={resetScreen}
+                    placeholder="Confirm new password"
+                    ref={confirmPasswordRef}
+                    type="password"
                 />
             </form>
             { loadingSpinner
@@ -118,41 +119,29 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 : <button className={classes.btn}
                     form="form-submit"
                     type="submit">
-                    Login
+                    Reset password
                 </button>
             }
             <div className={classes.errorMsgContainer}>
                 <div className={classes.errorMessage}>
-                    {loginFailed
-                        && (<p>*The username or password you have entered is invalid.
-                            <br /> Please try again.</p>)
-                    }
                     {validationFailed && (
                         validationErrorMsg
                             .map((msg: string) => <p key={msg.length}>** {msg}</p>)
                     )}
+                    {passwordMismatch && <p>***Passwords do not match</p>}
                 </div>
             </div>
             <div className={classes.promptContainer}>
-                <div className={classes.promptUnit}>
-                    <span>{signUpPromptText}</span>
-                    <button className={classes.btnAlternative}
-                        onClick={loginProps.toggleMode}
-                        type="button">
-                        Sign Up
-                    </button>
-                </div>
-                <div className={classes.promptUnit}>
-                    <span>{passwordResetPromptText}</span>
-                    <button className={classes.btnAlternative}
-                        onClick={loginProps.togglePasswordResetMode}
-                        type="button">
-                        Reset password
-                    </button>
-                </div>
+                {/* {loginPromptText} */}
+                Return to Login
+                <button className={classes.btnAlternative}
+                    onClick={resetProps.togglePasswordResetMode}
+                    type="button">
+                    Login
+                </button>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default LoginForm;
+export default ResetPasswordForm;

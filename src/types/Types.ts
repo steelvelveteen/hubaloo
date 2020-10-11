@@ -16,4 +16,9 @@ type CredentialsType = {
     password: string;
 };
 
-export type { TPost, UserType, CredentialsType };
+type ResetCredentialsType = {
+    email: string;
+    newPassword: string;
+}
+
+export type { TPost, UserType, CredentialsType, ResetCredentialsType };
