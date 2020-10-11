@@ -5,7 +5,7 @@ import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import { SignUp } from '../../services/auth.service';
+import { SignUp, validateEmail, validatePassword } from '../../services/auth.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from '../LoginForm/loginFormStyle';
 
@@ -19,10 +19,10 @@ type SignUpProps = {
     toggleMode: () => void;
 }
 
-type SignUpCredentials = {
-    credentials: CredentialsType,
-    confirmPassword: string
-}
+// type SignUpCredentials = {
+//     credentials: CredentialsType,
+//     confirmPassword: string
+// }
 
 const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const classes = useStyles();
@@ -79,11 +79,25 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        if (confirmPasswordRef?.current?.value === credentials.password) {
-            setLoadingSpinner(true);
-            return signupSubmit(event);
+        if (validateEmail(credentials.email) === null) {
+            validationErrorMsg = [];
+            validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
+            setValidationFailed(true);
+            return;
         }
-        setPasswordMismatch(true);
+        if (!validatePassword(credentials.password)) {
+            validationErrorMsg = [];
+            validationErrorMsg = [...validationErrorMsg, "Your password must be at least 8 characters long"];
+            setValidationFailed(true);
+            return;
+        }
+        ;
+        if (confirmPasswordRef?.current?.value !== credentials.password) {
+            setPasswordMismatch(true);
+            return;
+        }
+        setLoadingSpinner(true);
+        signupSubmit(event);
     }
 
     // If signup successfull redirect to complete user info form
