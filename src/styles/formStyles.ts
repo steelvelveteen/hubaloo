@@ -26,7 +26,6 @@ const FormStyles = makeStyles(() => ({
         marginBottom: '1rem',
     },
     btn: {
-        width: '34%',
         position: 'relative',
         padding: '0.5rem 1rem',
         cursor: 'pointer',
@@ -47,7 +46,7 @@ const FormStyles = makeStyles(() => ({
         background: 'transparent',
         padding: '0.5rem 0.7rem',
         color: 'grey',
-        marginLeft: '1rem',
+        marginLeft: '2rem',
         fontSize: '0.7rem',
         outline: 'none',
         cursor: 'pointer',
@@ -58,7 +57,7 @@ const FormStyles = makeStyles(() => ({
         '&:hover': {
             transform: 'scale(1.2)',
             backgroundColor: 'purple',
-            color: 'black'
+            color: 'white'
         }
     },
     errorMessage: {
@@ -68,6 +67,10 @@ const FormStyles = makeStyles(() => ({
     errorMsgContainer: {
         minHeight: '3.5rem',
         margin: '1rem 0',
+    },
+    successMessage: {
+        color: 'green',
+        fontSize: '0.8rem'
     },
     spinner: {
         color: 'white',

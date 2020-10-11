@@ -10,6 +10,7 @@ import FormStyles from '../../styles/formStyles';
 import { ResetCredentialsType } from '../../types/Types';
 
 const resetPasswordPromptText = "Reset password";
+const returnToLoginPromptText = "Back to Login";
 
 const useStyles = FormStyles;
 
@@ -18,6 +19,10 @@ let validationErrorMsg: string[] = [];
 type ResetPasswordProps = {
     toggleMode?: () => void;
     togglePasswordResetMode: () => void;
+}
+type ResetSuccessType = {
+    isSuccessful: boolean,
+    message: string
 }
 
 const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswordProps) => {
@@ -28,6 +33,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
+    const [resetSuccess, setResetSuccess] = React.useState<ResetSuccessType>({ isSuccessful: false, message: '' });
 
     const resetScreen = (): void => {
         setValidationFailed(false);
@@ -57,6 +63,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
             .subscribe(
                 (response) => {
                     console.log(response);
+                    setResetSuccess({ isSuccessful: true, message: response.message });
                 },
                 (error: any) => {
                     if (error.response.status === 422) {
@@ -131,10 +138,11 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                     )}
                     {passwordMismatch && <p>***Passwords do not match</p>}
                 </div>
+                {resetSuccess.isSuccessful && <div className={classes.successMessage}>{resetSuccess.message}</div>}
             </div>
+
             <div className={classes.promptContainer}>
-                {/* {loginPromptText} */}
-                <span>Return to Login</span>
+                <span>{returnToLoginPromptText}</span>
                 <button className={classes.btnAlternative}
                     onClick={resetProps.togglePasswordResetMode}
                     type="button">
