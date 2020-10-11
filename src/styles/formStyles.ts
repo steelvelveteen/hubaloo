@@ -24,26 +24,42 @@ const FormStyles = makeStyles(() => ({
     },
     promptUnit: {
         marginBottom: '1rem',
-        // display: 'flex',
-        alignItems: 'baseline',
-        justifyContent: 'space-around'
     },
     btn: {
+        width: '34%',
         position: 'relative',
         padding: '0.5rem 1rem',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        borderRadius: '5px',
+        border: 'none',
+        '&:hover': {
+            transform: 'scale(1.2)',
+            backgroundColor: 'purple',
+            color: 'white'
+        },
+        ' &:focus': {
+            outline: 'none',
+            // boxShadow: 'none',
+            // transform: 'scale(1.3)',
+        }
     },
     btnAlternative: {
         background: 'transparent',
         padding: '0.5rem 0.7rem',
-        color: 'white',
+        color: 'grey',
         marginLeft: '1rem',
         fontSize: '0.7rem',
         outline: 'none',
         cursor: 'pointer',
-        border: '1px solid white',
+        border: 'none',
+        // borderBottom: '1px solid white',
         borderRadius: '5px',
-        marginTop: '0.5rem'
+        marginTop: '0.5rem',
+        '&:hover': {
+            transform: 'scale(1.2)',
+            backgroundColor: 'purple',
+            color: 'black'
+        }
     },
     errorMessage: {
         color: '#e83317',
