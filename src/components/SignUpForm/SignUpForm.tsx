@@ -6,12 +6,12 @@ import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
+import FormStyles from '../../styles/formStyles';
 import { CredentialsType } from '../../types/Types';
-import loginFormStyle from '../LoginForm/loginFormStyle';
 
 const loginPromptText = "Already have an account?";
 
-const useStyles = loginFormStyle;
+const useStyles = FormStyles;
 
 let validationErrorMsg: string[] = [];
 
@@ -24,8 +24,8 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const confirmPasswordRef: React.RefObject<HTMLInputElement> = React.createRef();
 
     const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
-    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
     // If signup successfull redirect to complete user info form
     // const [signupSucessfull, setSignupSuccessfull] = React.useState<boolean>(false);

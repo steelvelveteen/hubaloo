@@ -6,13 +6,13 @@ import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
+import FormStyles from '../../styles/formStyles';
 import { CredentialsType } from '../../types/Types';
-import loginFormStyle from './loginFormStyle';
 
 const signUpPromptText = "Don't have an account?";
 const passwordResetPromptText = "Forgot your password?";
 
-const useStyles = loginFormStyle;
+const useStyles = FormStyles;
 
 let validationErrorMsg: string[] = [];
 
@@ -25,10 +25,12 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const classes = useStyles();
 
     const [credentials, setLoginCredentials] = React.useState<CredentialsType>({ email: '', password: '' });
-    const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
-    const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
+
+    const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
+    const [loginFailed, setLoginFailed] = React.useState<boolean>(false);
+
 
     const resetScreen = (): void => {
         setLoginFailed(false);

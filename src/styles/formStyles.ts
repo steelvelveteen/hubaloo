@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const loginFormStyle = makeStyles(() => ({
+const FormStyles = makeStyles(() => ({
     form: {
         marginBottom: '1rem',
         display: 'flex',
@@ -17,7 +17,7 @@ const loginFormStyle = makeStyles(() => ({
         color: 'white'
     },
     promptContainer: {
-        margin: '1rem 1rem 1rem 0',
+        margin: '2rem 1rem 1rem 0',
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '0.9rem'
@@ -59,4 +59,4 @@ const loginFormStyle = makeStyles(() => ({
     }
 }));
 
-export default loginFormStyle;
+export default FormStyles;

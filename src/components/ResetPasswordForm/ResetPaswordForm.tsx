@@ -6,10 +6,12 @@ import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
+import FormStyles from '../../styles/formStyles';
 import { ResetCredentialsType } from '../../types/Types';
-import loginFormStyle from '../LoginForm/loginFormStyle';
 
-const useStyles = loginFormStyle;
+const resetPasswordPromptText = "Reset password";
+
+const useStyles = FormStyles;
 
 let validationErrorMsg: string[] = [];
 
@@ -23,8 +25,8 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
     const confirmPasswordRef: React.RefObject<HTMLInputElement> = React.createRef();
 
     const [newCredentials, setNewCredentials] = React.useState<ResetCredentialsType>({ email: '', newPassword: '' });
-    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
+    const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
 
     const resetScreen = (): void => {
@@ -118,7 +120,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                 : <button className={classes.btn}
                     form="form-submit"
                     type="submit">
-                    Reset password
+                    {resetPasswordPromptText}
                 </button>
             }
             <div className={classes.errorMsgContainer}>
