@@ -18,15 +18,15 @@ const loginFormStyle = makeStyles(() => ({
     },
     promptContainer: {
         margin: '1rem 1rem 1rem 0',
-        display: 'flex',
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        // alignItems: 'baseline',
         fontSize: '0.9rem'
     },
     promptUnit: {
-        marginBottom: '1rem'
+        marginBottom: '1rem',
+        // display: 'flex',
+        alignItems: 'baseline',
+        justifyContent: 'space-around'
     },
     btn: {
         position: 'relative',

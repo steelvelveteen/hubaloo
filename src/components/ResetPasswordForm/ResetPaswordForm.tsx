@@ -22,7 +22,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
     const classes = useStyles();
     const confirmPasswordRef: React.RefObject<HTMLInputElement> = React.createRef();
 
-    const [credentials, setLoginCredentials] = React.useState<ResetCredentialsType>({ email: '', newPassword: '' });
+    const [newCredentials, setNewCredentials] = React.useState<ResetCredentialsType>({ email: '', newPassword: '' });
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
     const [loadingSpinner, setLoadingSpinner] = React.useState<boolean>(false);
     const [passwordMismatch, setPasswordMismatch] = React.useState<boolean>(false);
@@ -34,19 +34,18 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
 
     const setEmail = (event: React.FormEvent<HTMLInputElement>) => {
         resetScreen();
-        setLoginCredentials({ ...credentials, email: event.currentTarget.value });
+        setNewCredentials({ ...newCredentials, email: event.currentTarget.value });
     };
 
     const setPassword = (event: React.FormEvent<HTMLInputElement>) => {
         resetScreen();
-        setLoginCredentials({ ...credentials, newPassword: event.currentTarget.value });
+        setNewCredentials({ ...newCredentials, newPassword: event.currentTarget.value });
     };
 
     const resetPasswordSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
-        console.log(credentials);
         validationErrorMsg = [];
         event.preventDefault();
-        AuthService.ResetPassword(credentials)
+        AuthService.ResetPassword(newCredentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -72,19 +71,19 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        if (AuthService.validateEmail(credentials.email) === null) {
+        if (AuthService.validateEmail(newCredentials.email) === null) {
             validationErrorMsg = [];
             validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
             setValidationFailed(true);
             return;
         }
-        if (!AuthService.validatePassword(credentials.newPassword)) {
+        if (!AuthService.validatePassword(newCredentials.newPassword)) {
             validationErrorMsg = [];
             validationErrorMsg = [...validationErrorMsg, "Your password must be at least 8 characters long"];
             setValidationFailed(true);
             return;
         }
-        if (confirmPasswordRef?.current?.value !== credentials.newPassword) {
+        if (confirmPasswordRef?.current?.value !== newCredentials.newPassword) {
             setPasswordMismatch(true);
             return;
         }
@@ -100,12 +99,12 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                     onChange={setEmail}
                     placeholder="Your current email"
                     type="text"
-                    value={credentials?.email} />
+                    value={newCredentials?.email} />
                 <input className={classes.inputFields}
                     onChange={setPassword}
                     placeholder="Enter new password"
                     type="password"
-                    value={credentials?.newPassword}
+                    value={newCredentials?.newPassword}
                 />
                 <input className={classes.inputFields}
                     onChange={resetScreen}
@@ -133,7 +132,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
             </div>
             <div className={classes.promptContainer}>
                 {/* {loginPromptText} */}
-                Return to Login
+                <span>Return to Login</span>
                 <button className={classes.btnAlternative}
                     onClick={resetProps.togglePasswordResetMode}
                     type="button">
