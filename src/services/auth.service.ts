@@ -14,4 +14,6 @@ const Login = (credentials: CredentialsType): Observable<AxiosResponse<UserType>
 
 const SignUp = (credentials: CredentialsType): Observable<AxiosResponse<UserType>> => DataService.Post(credentials, '/auth/signup');
 
-export { Login, SignUp, validateEmail, validatePassword };
+export {
+    Login, SignUp, validateEmail, validatePassword
+};

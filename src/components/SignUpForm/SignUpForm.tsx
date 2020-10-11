@@ -5,7 +5,7 @@ import { CircularProgress } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import { SignUp, validateEmail, validatePassword } from '../../services/auth.service';
+import * as AuthService from '../../services/auth.service';
 import { CredentialsType } from '../../types/Types';
 import loginFormStyle from '../LoginForm/loginFormStyle';
 
@@ -18,11 +18,6 @@ let validationErrorMsg: string[] = [];
 type SignUpProps = {
     toggleMode: () => void;
 }
-
-// type SignUpCredentials = {
-//     credentials: CredentialsType,
-//     confirmPassword: string
-// }
 
 const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const classes = useStyles();
@@ -53,7 +48,7 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         validationErrorMsg = [];
         event.preventDefault();
-        SignUp(credentials)
+        AuthService.SignUp(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -79,13 +74,13 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        if (validateEmail(credentials.email) === null) {
+        if (AuthService.validateEmail(credentials.email) === null) {
             validationErrorMsg = [];
             validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
             setValidationFailed(true);
             return;
         }
-        if (!validatePassword(credentials.password)) {
+        if (!AuthService.validatePassword(credentials.password)) {
             validationErrorMsg = [];
             validationErrorMsg = [...validationErrorMsg, "Your password must be at least 8 characters long"];
             setValidationFailed(true);
@@ -102,7 +97,7 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
 
     // If signup successfull redirect to complete user info form
     // if (signUpSuccessfull) {
-    //     return (<Redirect to="/mainboard/home" />);
+    //     return (<Redirect to="/msomeregistratinform view />);
     // }
 
     return (
@@ -125,7 +120,6 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                     placeholder="Confirm Password"
                     ref={confirmPasswordRef}
                     type="password"
-                // value={credentials?.password}
                 />
             </form>
             { loadingSpinner
