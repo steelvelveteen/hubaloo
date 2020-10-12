@@ -73,6 +73,7 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 // (response: { token: string, email: string }) => {
                 (response: LoginResponseType) => {
                     console.log(response);
+                    localStorage.setItem('token', response.token);
                     setLoginSuccess(true);
                 },
                 (error: any) => {

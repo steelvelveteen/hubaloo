@@ -3,13 +3,14 @@ import { from, Observable } from 'rxjs';
 
 import { TPost } from '../types/Types';
 
-const token = 'eyJhbGciOiJIUzI1NiJ9.am9leXZpY29AZ21haWwuY29t.q3KyV9cSOkoa_JUiCBVDhzTltyA8GWyLC3evK8Ek6gE';
+const token = localStorage.getItem('token');
 
 const herokuApiUrl = 'https://stormy-garden-32374.herokuapp.com';
 const localApiUrl = 'http://localhost:8080';
 const dockerlocalApiUrl = 'http://localhost:49160';
+const elasticBeanStalkURLaws = 'http://habalooapiebdocker-env.eba-mfhpxbcb.ap-southeast-2.elasticbeanstalk.com';
 
-const customBaseURL = localApiUrl;
+const customBaseURL = elasticBeanStalkURLaws;
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: customBaseURL,
