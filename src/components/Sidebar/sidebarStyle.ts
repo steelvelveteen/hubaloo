@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import { drawerWidth, fontColorPurple, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, fontColorLightBlue, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const sidebarStyle = makeStyles(() => ({
     drawerPaper: {
@@ -15,26 +15,25 @@ const sidebarStyle = makeStyles(() => ({
         paddingBottom: '0',
         marginBottom: '0',
         listStyle: 'none',
-        position: 'unset'
+        position: 'unset',
     },
     item: {
-        color: fontColorPurple,
+        color: 'white',
         position: 'relative',
         display: 'block',
         borderRadius: '3px',
-        textDecoration: 'none',
-        '&:hover': {
-            backgroundColor: mainBackgroundColor
-        }
+        textDecoration: 'none'
     },
     itemLink: {
-        // display: 'flex',
+        borderRadius: '3px',
         width: 'auto',
         height: '100%',
         transition: 'all 300ms linear',
-        margin: '10px 15px 0',
+        margin: '10px 0',
         position: 'relative',
-        padding: '10px 15px',
+        '&:hover': {
+            backgroundColor: fontColorLightBlue
+        }
     },
     itemIcon: {
         marginRight: '1rem',
@@ -50,8 +49,7 @@ const sidebarStyle = makeStyles(() => ({
         position: 'relative',
         height: 'calc(100vh - 75px)',
         overflow: 'auto',
-        overflowScrolling: 'touch',
-
+        overflowScrolling: 'touch'
     },
     background: {
         position: 'absolute',
@@ -70,7 +68,7 @@ const sidebarStyle = makeStyles(() => ({
             height: '100%',
             content: '""',
             display: 'block',
-            // background: mainBackgroundColor,
+            background: '#483C32',
             opacity: '.9'
         }
     }
