@@ -10,14 +10,13 @@ const FormStyles = makeStyles(() => ({
     inputFields: {
         margin: '0.5rem 1rem',
         padding: '0.5rem',
-        border: '1px solid white',
+        border: '1px solid black',
         borderRadius: '5px',
         marginRight: '1rem',
         background: 'transparent',
-        color: 'white'
+        color: 'black'
     },
     promptContainer: {
-        margin: '2rem 1rem 1rem 0',
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '0.9rem'
@@ -38,8 +37,6 @@ const FormStyles = makeStyles(() => ({
         },
         ' &:focus': {
             outline: 'none',
-            // boxShadow: 'none',
-            // transform: 'scale(1.3)',
         }
     },
     btnAlternative: {
@@ -51,7 +48,6 @@ const FormStyles = makeStyles(() => ({
         outline: 'none',
         cursor: 'pointer',
         border: 'none',
-        // borderBottom: '1px solid white',
         borderRadius: '5px',
         marginTop: '0.5rem',
         '&:hover': {

@@ -139,13 +139,15 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                 </div>
             </div>
             <div className={classes.promptContainer}>
-                {loginPromptText}
-                <button className={classes.btnAlternative}
-                    onClick={signUpProps.toggleMode}
-                    type="button">
-                    Login
+                <div className={classes.promptUnit}>
+                    <span>{loginPromptText}</span>
+                    <button className={classes.btnAlternative}
+                        onClick={signUpProps.toggleMode}
+                        type="button">
+                        Login
                 </button>
-            </div>
+                </div>
+            </div >
         </>
     );
 };
