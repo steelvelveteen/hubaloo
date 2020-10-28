@@ -9,8 +9,9 @@ const herokuApiUrl = 'https://stormy-garden-32374.herokuapp.com';
 const localApiUrl = 'http://localhost:8080';
 const dockerlocalApiUrl = 'http://localhost:49160';
 const elasticBeanStalkURLaws = 'http://habalooapiebdocker-env.eba-mfhpxbcb.ap-southeast-2.elasticbeanstalk.com';
+const netcoreApiUrl = 'http://localhost:5000';
 
-const customBaseURL = elasticBeanStalkURLaws;
+const customBaseURL = netcoreApiUrl;
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: customBaseURL,

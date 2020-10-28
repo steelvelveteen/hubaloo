@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 
 import { CircularProgress } from '@material-ui/core';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
@@ -35,7 +35,6 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
 
     const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
     const [loginFailure, setLoginFailure] = React.useState<LoginFailureType>({ hasFailed: false, message: [''] });
-
 
     const resetScreen = (): void => {
         setLoginFailure({ hasFailed: false, message: [''] });
@@ -76,10 +75,10 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                     localStorage.setItem('token', response.token);
                     setLoginSuccess(true);
                 },
-                (error: any) => {
+                (error: AxiosError) => {
                     setLoginFailure({
                         hasFailed: true,
-                        message: error.response.data.message
+                        message: error?.response?.data.message
                     });
                 }
             )
@@ -157,7 +156,7 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                     <button className={classes.btnAlternative}
                         onClick={loginProps.togglePasswordResetMode}
                         type="button">
-                        Reset password
+                        Reset
                     </button>
                 </div>
             </div>

@@ -9,14 +9,12 @@ const landingPageStyle = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        // color: 'black',
-        // padding: '0 20px',
     },
     backgroundContainer: {
         backgroundImage: `url(${bg})`,
         backgroundSize: 'cover',
         position: 'absolute',
-        // zIndex: 1,
+        zIndex: 1,
         top: '0',
         left: '0',
         width: '100%',
@@ -24,23 +22,15 @@ const landingPageStyle = makeStyles(() => ({
     },
     formContainer: {
         backgroundColor: 'white',
+        opacity: '0.9',
         padding: '1rem',
         borderRadius: '5%',
-        border: '1px solid black',
+        border: '2px solid #720178',
         zIndex: 2,
     },
     welcomeTitle: {
         textTransform: 'uppercase',
         letterSpacing: '0.5rem'
-    },
-    img: {
-        minWidth: '100%',
-        minHeight: '100%',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: `translate(-50%, -50%)`,
-        objectFit: 'cover'
     },
     btn: {
         textDecoration: 'none',

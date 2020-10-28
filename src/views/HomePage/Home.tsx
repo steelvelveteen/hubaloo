@@ -19,7 +19,7 @@ const HomePage = (): React.ReactElement => {
                     setPosts(response);
                 },
                 ((error: AxiosError) => {
-                    // console.log(error);
+                    console.log(error);
                 })
             );
 

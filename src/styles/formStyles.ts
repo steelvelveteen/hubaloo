@@ -10,19 +10,21 @@ const FormStyles = makeStyles(() => ({
     inputFields: {
         margin: '0.5rem 1rem',
         padding: '0.5rem',
-        border: '1px solid black',
+        border: '1px solid #720178',
         borderRadius: '5px',
-        marginRight: '1rem',
         background: 'transparent',
-        color: 'black'
+        color: '#720178',
+        outline: 'none'
     },
     promptContainer: {
-        justifyContent: 'center',
         alignItems: 'center',
         fontSize: '0.9rem'
     },
     promptUnit: {
-        marginBottom: '1rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
+        color: '#720178'
     },
     btn: {
         position: 'relative',
@@ -32,7 +34,7 @@ const FormStyles = makeStyles(() => ({
         border: 'none',
         '&:hover': {
             transform: 'scale(1.2)',
-            backgroundColor: 'purple',
+            backgroundColor: '#720178',
             color: 'white'
         },
         ' &:focus': {
@@ -41,19 +43,15 @@ const FormStyles = makeStyles(() => ({
     },
     btnAlternative: {
         background: 'transparent',
-        padding: '0.5rem 0.7rem',
         color: 'grey',
-        marginLeft: '2rem',
         fontSize: '0.7rem',
         outline: 'none',
         cursor: 'pointer',
         border: 'none',
-        borderRadius: '5px',
+        // borderRadius: '5px',
         marginTop: '0.5rem',
         '&:hover': {
-            transform: 'scale(1.2)',
-            backgroundColor: 'purple',
-            color: 'white'
+            color: '#720178'
         }
     },
     errorMessage: {
@@ -69,7 +67,7 @@ const FormStyles = makeStyles(() => ({
         fontSize: '0.8rem'
     },
     spinner: {
-        color: 'white',
+        color: '#720178',
         // size: '100px'
     }
 }));
