@@ -1,10 +1,10 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { iconOutlineColor, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { iconOutlineColor, bgColorPurple } from '../../assets/tsstyles/constants';
 
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
-        backgroundColor: mainBackgroundColor,
+        backgroundColor: bgColorPurple,
         borderBottom: `1px solid ${iconOutlineColor}`,
         [theme.breakpoints.up('xl')]: {
             // width: `calc(100% - ${drawerWidth}px)`,
@@ -33,7 +33,7 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         top: '2px'
     },
     bottomNavBar: {
-        backgroundColor: mainBackgroundColor,
+        backgroundColor: bgColorPurple,
         [theme.breakpoints.down('xs')]: {
             top: 'auto',
             bottom: '0',

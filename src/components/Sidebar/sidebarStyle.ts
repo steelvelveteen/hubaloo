@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import { drawerWidth, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, fontColorPurple, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const sidebarStyle = makeStyles(() => ({
     drawerPaper: {
@@ -18,7 +18,7 @@ const sidebarStyle = makeStyles(() => ({
         position: 'unset'
     },
     item: {
-        color: 'white',
+        color: fontColorPurple,
         position: 'relative',
         display: 'block',
         borderRadius: '3px',
@@ -70,7 +70,7 @@ const sidebarStyle = makeStyles(() => ({
             height: '100%',
             content: '""',
             display: 'block',
-            background: mainBackgroundColor,
+            // background: mainBackgroundColor,
             opacity: '.9'
         }
     }
