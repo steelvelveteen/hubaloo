@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { drawerWidth, fontColorBlack, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, fontColorTaupe, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const mainlayoutStyle = makeStyles((theme: Theme) => ({
     wrapper: {
@@ -19,7 +19,7 @@ const mainlayoutStyle = makeStyles((theme: Theme) => ({
     },
     content: {
         padding: '1.5rem 0.5rem',
-        color: fontColorBlack,
+        color: fontColorTaupe,
         [theme.breakpoints.up('sm')]: {
             // marginTop: '1.1rem',
             // padding: '1.5rem 1rem',

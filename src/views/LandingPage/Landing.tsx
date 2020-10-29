@@ -26,8 +26,9 @@ const LandingPage: React.FC = () => {
         <div className={classes.backgroundContainer} />
         {!passwordResetMode
           ? <div className={classes.formContainer}>
-            <h3 className={classes.welcomeTitle}>Welcome to </h3>
-            <h4 className={classes.welcomeTitle}>Hubaloo</h4>
+            <h4 className={classes.welcomeTitle}>Welcome</h4>
+            <h5 className={classes.welcomeTitle}>to </h5>
+            <h3 className={classes.welcomeTitle}>Hubaloo</h3>
             {loginMode ? <LoginForm
               toggleMode={toggleLoginSignUpMode}
               togglePasswordResetMode={togglePasswordResetMode} />

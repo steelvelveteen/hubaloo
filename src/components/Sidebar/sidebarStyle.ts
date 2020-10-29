@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import { drawerWidth, fontColorLightBlue, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { drawerWidth, fontColorLightBlue } from '../../assets/tsstyles/constants';
 
 const sidebarStyle = makeStyles(() => ({
     drawerPaper: {

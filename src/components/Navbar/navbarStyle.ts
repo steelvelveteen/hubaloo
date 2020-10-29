@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { iconOutlineColor, bgColorPurple } from '../../assets/tsstyles/constants';
+import { bgColorPurple, iconOutlineColor } from '../../assets/tsstyles/constants';
 
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {

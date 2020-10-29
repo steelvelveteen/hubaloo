@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
+import { fontColorPink, fontColorTaupe } from '../assets/tsstyles/constants';
+
 const FormStyles = makeStyles(() => ({
     form: {
         marginBottom: '1rem',
@@ -10,10 +12,10 @@ const FormStyles = makeStyles(() => ({
     inputFields: {
         margin: '0.5rem 1rem',
         padding: '0.5rem',
-        border: '1px solid #720178',
+        border: `1px solid ${fontColorPink}`,
         borderRadius: '5px',
         background: 'transparent',
-        color: '#720178',
+        color: fontColorTaupe,
         outline: 'none'
     },
     promptContainer: {
@@ -24,9 +26,10 @@ const FormStyles = makeStyles(() => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'baseline',
-        color: '#720178'
+        color: fontColorPink
     },
     btn: {
+        color: fontColorTaupe,
         position: 'relative',
         padding: '0.5rem 1rem',
         cursor: 'pointer',
@@ -34,7 +37,7 @@ const FormStyles = makeStyles(() => ({
         border: 'none',
         '&:hover': {
             transform: 'scale(1.2)',
-            backgroundColor: '#720178',
+            backgroundColor: fontColorPink,
             color: 'white'
         },
         ' &:focus': {
