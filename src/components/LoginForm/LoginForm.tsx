@@ -90,13 +90,11 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
         if (AuthService.validateEmail(credentials.email) === null) {
-            validationErrorMsg = '';
             validationErrorMsg = invalidEmailMsg;
             setValidationFailed(true);
             return;
         }
         if (!AuthService.validatePassword(credentials.password)) {
-            validationErrorMsg = '';
             validationErrorMsg = invalidPasswordMsg;
             setValidationFailed(true);
             return;

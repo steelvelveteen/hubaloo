@@ -2,7 +2,7 @@ import React from 'react';
 // import { Redirect } from "react-router-dom";
 
 import { CircularProgress } from '@material-ui/core';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
@@ -10,10 +10,14 @@ import FormStyles from '../../styles/formStyles';
 import { CredentialsType } from '../../types/Types';
 
 const loginPromptText = "Already have an account?";
+const generalErrorMessage = "Something went wrong. Please try again later";
+const invalidEmailMsg = "Please enter a valid email";
+const invalidPasswordMsg = "You must provide your password for logging in";
+const passwordMismatchMsg = "***Passwords do not match";
 
 const useStyles = FormStyles;
 
-let validationErrorMsg: string[] = [];
+let validationErrorMsg = '';
 
 type SignUpProps = {
     toggleMode: () => void;
@@ -46,7 +50,6 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     };
 
     const signupSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
-        validationErrorMsg = [];
         event.preventDefault();
         AuthService.SignUp(credentials)
             .pipe(
@@ -59,14 +62,8 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                 (response) => {
                     console.log(response);
                 },
-                (error: any) => {
-                    if (error.response.status === 422) {
-                        error.response.data.error.forEach((err: any) => {
-                            validationErrorMsg.push(err.msg);
-                        });
-                    } else if (error.response.status === 409) {
-                        validationErrorMsg.push(error.response.data.message);
-                    }
+                (error: AxiosError) => {
+                    validationErrorMsg = error?.response?.data.message;
                     setValidationFailed(true);
                 }
             );
@@ -75,14 +72,12 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
         if (AuthService.validateEmail(credentials.email) === null) {
-            validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
+            validationErrorMsg = invalidEmailMsg;
             setValidationFailed(true);
             return;
         }
         if (!AuthService.validatePassword(credentials.password)) {
-            validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "Your password must be at least 8 characters long"];
+            validationErrorMsg = invalidPasswordMsg;
             setValidationFailed(true);
             return;
         }
@@ -131,11 +126,11 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
             }
             <div className={classes.errorMsgContainer}>
                 <div className={classes.errorMessage}>
-                    {validationFailed && (
-                        validationErrorMsg
-                            .map((msg: string) => <p key={msg.length}>** {msg}</p>)
-                    )}
-                    {passwordMismatch && <p>***Passwords do not match</p>}
+                    {validationFailed && (validationErrorMsg
+                        ? <p>{validationErrorMsg}</p>
+                        : <p>{generalErrorMessage}</p>)
+                    }
+                    {passwordMismatch && <p>{passwordMismatchMsg}</p>}
                 </div>
             </div>
             <div className={classes.promptContainer}>
