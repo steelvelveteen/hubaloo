@@ -23,6 +23,8 @@ const FormStyles = makeStyles(() => ({
         fontSize: '0.9rem'
     },
     promptUnit: {
+        width: '80%',
+        margin: 'auto',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'baseline',

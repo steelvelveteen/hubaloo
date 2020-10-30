@@ -8,8 +8,6 @@ import GetAllUsers from '../../services/user-profile.service';
 import { UserType } from '../../types/Types';
 
 const ProfilePage: React.FC = () => {
-    const [users, setUsers] = React.useState<UserType[]>();
-
     React.useEffect(() => {
         const subscription = GetAllUsers()
             .pipe(
@@ -19,10 +17,8 @@ const ProfilePage: React.FC = () => {
             )
             .subscribe(
                 (response: UserType[]) => {
-                    setUsers(response)
                 },
                 (err: any) => {
-                    console.log(err);
                 }
             );
 
@@ -30,8 +26,7 @@ const ProfilePage: React.FC = () => {
     }, []);
     return (
         <>
-            <h3>Users that come from my api Heroku + ATLAS</h3>
-            { users && users.map((user: UserType) => <div key={user._id}>{user.email}</div>)}
+            <h3>User profile page</h3>
         </>
     );
 };
