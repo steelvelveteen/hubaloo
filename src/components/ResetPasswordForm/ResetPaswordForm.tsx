@@ -2,7 +2,7 @@ import React from 'react';
 // import { Redirect } from "react-router-dom";
 
 import { CircularProgress } from '@material-ui/core';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
 import * as AuthService from '../../services/auth.service';
@@ -11,10 +11,13 @@ import { ResetCredentialsType } from '../../types/Types';
 
 const resetPasswordPromptText = "Reset password";
 const returnToLoginPromptText = "Back to Login";
+const generalErrorMessage = "Something went wrong. Please try again later";
+const invalidEmailMsg = "Please enter a valid email";
+const invalidPasswordMsg = "You must provide your password for logging in";
 
 const useStyles = FormStyles;
 
-let validationErrorMsg: string[] = [];
+let validationErrorMsg = '';
 
 type ResetPasswordProps = {
     toggleMode?: () => void;
@@ -51,7 +54,6 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
     };
 
     const resetPasswordSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
-        validationErrorMsg = [];
         event.preventDefault();
         AuthService.ResetPassword(newCredentials)
             .pipe(
@@ -65,14 +67,15 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                     console.log(response);
                     setResetSuccess({ isSuccessful: true, message: response.message });
                 },
-                (error: any) => {
-                    if (error.response.status === 422) {
-                        error.response.data.error.forEach((err: any) => {
-                            validationErrorMsg.push(err.msg);
-                        });
-                    } else if (error.response.status === 409) {
-                        validationErrorMsg.push(error.response.data.message);
-                    }
+                (error: AxiosError) => {
+                    // if (error.response.status === 422) {
+                    //     error.response.data.error.forEach((err: any) => {
+                    //         validationErrorMsg = err.msg;
+                    //     });
+                    // } else if (error.response.status === 409) {
+                    //     validationErrorMsg = error?.response?.data.message;
+                    // }
+                    validationErrorMsg = error?.response?.data.message;
                     setValidationFailed(true);
                 }
             );
@@ -81,14 +84,12 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
         if (AuthService.validateEmail(newCredentials.email) === null) {
-            validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
+            validationErrorMsg = invalidEmailMsg;
             setValidationFailed(true);
             return;
         }
         if (!AuthService.validatePassword(newCredentials.newPassword)) {
-            validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "Your password must be at least 8 characters long"];
+            validationErrorMsg = invalidPasswordMsg;
             setValidationFailed(true);
             return;
         }
@@ -132,10 +133,10 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
             }
             <div className={classes.errorMsgContainer}>
                 <div className={classes.errorMessage}>
-                    {validationFailed && (
-                        validationErrorMsg
-                            .map((msg: string) => <p key={msg.length}>** {msg}</p>)
-                    )}
+                    {validationFailed && (validationErrorMsg
+                        ? <p>{validationErrorMsg}</p>
+                        : <p>{generalErrorMessage}</p>)
+                    }
                     {passwordMismatch && <p>***Passwords do not match</p>}
                 </div>
                 {resetSuccess.isSuccessful && <div className={classes.successMessage}>{resetSuccess.message}</div>}
