@@ -11,10 +11,13 @@ import { CredentialsType } from '../../types/Types';
 
 const signUpPromptText = "Don't have an account?";
 const passwordResetPromptText = "Forgot your password?";
+const generalErrorMessage = "Something went wrong. Please try again later";
+const invalidEmailMsg = "Please enter a valid email";
+const invalidPasswordMsg = "You must provide your password for logging in";
 
 const useStyles = FormStyles;
 
-let validationErrorMsg: string[] = [];
+let validationErrorMsg = '';
 
 type LoginProps = {
     toggleMode: () => void;
@@ -23,7 +26,7 @@ type LoginProps = {
 
 type LoginFailureType = {
     hasFailed: boolean,
-    message: string[],
+    message: string,
 }
 
 const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
@@ -34,10 +37,10 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const [validationFailed, setValidationFailed] = React.useState<boolean>(false);
 
     const [loginSuccess, setLoginSuccess] = React.useState<boolean>(false);
-    const [loginFailure, setLoginFailure] = React.useState<LoginFailureType>({ hasFailed: false, message: [''] });
+    const [loginFailure, setLoginFailure] = React.useState<LoginFailureType>({ hasFailed: false, message: '' });
 
     const resetScreen = (): void => {
-        setLoginFailure({ hasFailed: false, message: [''] });
+        setLoginFailure({ hasFailed: false, message: '' });
         setValidationFailed(false);
     }
 
@@ -87,14 +90,14 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
         if (AuthService.validateEmail(credentials.email) === null) {
-            validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "Please enter a valid email"];
+            validationErrorMsg = '';
+            validationErrorMsg = invalidEmailMsg;
             setValidationFailed(true);
             return;
         }
         if (!AuthService.validatePassword(credentials.password)) {
-            validationErrorMsg = [];
-            validationErrorMsg = [...validationErrorMsg, "You must provide your password for logging in"];
+            validationErrorMsg = '';
+            validationErrorMsg = invalidPasswordMsg;
             setValidationFailed(true);
             return;
         }
@@ -134,12 +137,13 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 <div className={classes.errorMessage}>
                     {loginFailure.hasFailed
                         && (loginFailure.message
-                            .map((msg: string) => <p key={msg.length}>** {msg}</p>))
+                            ? <p>{loginFailure.message}</p>
+                            : <p>{generalErrorMessage}</p>)
                     }
-                    {validationFailed && (
-                        validationErrorMsg
-                            .map((msg: string) => <p key={msg.length}>** {msg}</p>)
-                    )}
+                    {validationFailed && (validationErrorMsg
+                        ? <p>{validationErrorMsg}</p>
+                        : <p>{generalErrorMessage}</p>)
+                    }
                 </div>
             </div>
             <div className={classes.promptContainer}>
