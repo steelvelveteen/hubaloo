@@ -22,8 +22,9 @@ const landingPageStyle = makeStyles(() => ({
         height: '100%',
     },
     formContainer: {
+        // opacity: '0.95',
+        minWidth: '368px',
         backgroundColor: mainBackgroundColor,
-        // opacity: '0.9',
         padding: '1rem',
         borderRadius: '2%',
         border: `2px solid ${fontColorPink}`,
