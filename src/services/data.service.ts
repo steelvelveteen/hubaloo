@@ -5,13 +5,13 @@ import { TPost } from '../types/Types';
 
 const token = localStorage.getItem('token');
 
-const herokuApiUrl = 'https://stormy-garden-32374.herokuapp.com';
-const localApiUrl = 'http://localhost:8080';
-const dockerlocalApiUrl = 'http://localhost:49160';
-const elasticBeanStalkURLaws = 'http://habalooapiebdocker-env.eba-mfhpxbcb.ap-southeast-2.elasticbeanstalk.com';
-const netcoreApiUrl = 'http://localhost:5000';
+const herokuApi = 'https://stormy-garden-32374.herokuapp.com';
+const localNodeApi = 'http://localhost:8080';
+const localDockerApi = 'http://localhost:49160';
+const elasticBeanStalkApi = 'http://habalooapiebdocker-env.eba-mfhpxbcb.ap-southeast-2.elasticbeanstalk.com';
+const localNetcoreApi = 'http://localhost:5000';
 
-const customBaseURL = netcoreApiUrl;
+const customBaseURL = localNetcoreApi;
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: customBaseURL,
