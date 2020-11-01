@@ -8,6 +8,7 @@ import { finalize, map } from 'rxjs/operators';
 import * as AuthService from '../../services/auth.service';
 import FormStyles from '../../styles/formStyles';
 import { CredentialsType } from '../../types/Types';
+import PromptUnit from '../PromptUnit/PrompUnit';
 
 const loginPromptText = "Already have an account?";
 const generalErrorMessage = "Something went wrong. Please try again later";
@@ -134,14 +135,10 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                 </div>
             </div>
             <div className={classes.promptContainer}>
-                <div className={classes.promptUnit}>
-                    <span>{loginPromptText}</span>
-                    <button className={classes.btnAlternative}
-                        onClick={signUpProps.toggleLoginMode}
-                        type="button">
-                        Login
-                </button>
-                </div>
+                <PromptUnit
+                    btnText="Login"
+                    promptText={loginPromptText}
+                    toggle={signUpProps.toggleLoginMode} />
             </div >
         </>
     );

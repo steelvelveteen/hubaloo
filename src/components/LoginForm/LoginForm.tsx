@@ -76,7 +76,7 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 // (response: { token: string, email: string }) => {
                 (response: LoginResponseType) => {
                     console.log(response);
-                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('token', JSON.stringify(response.token));
                     setLoginSuccess(true);
                 },
                 (error: AxiosError) => {
@@ -146,26 +146,10 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 </div>
             </div>
             <div className={classes.promptContainer}>
-                {/* <div className={classes.promptUnit}>
-                    <span>{signUpPromptText}</span>
-                    <button className={classes.btnAlternative}
-                        onClick={loginProps.toggleSignUpMode}
-                        type="button">
-                        Sign Up
-                    </button>
-                </div> */}
                 <PromptUnit
                     btnText="Sign Up"
                     promptText={signUpPromptText}
                     toggle={loginProps.toggleSignUpMode} />
-                {/* <div className={classes.promptUnit}>
-                    <span>{passwordResetPromptText}</span>
-                    <button className={classes.btnAlternative}
-                        onClick={loginProps.togglePasswordResetMode}
-                        type="button">
-                        Reset
-                    </button>
-                </div> */}
                 <PromptUnit
                     btnText="Reset"
                     promptText={passwordResetPromptText}

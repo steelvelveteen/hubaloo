@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { bgColorPurple, iconOutlineColor, lightenedBgColorPurple } from '../../assets/tsstyles/constants';
+import { bgColorPurple, iconOutlineColor, lightPurple } from '../../assets/tsstyles/constants';
 
 const navbarStyle = makeStyles((theme: Theme) => ({
     navbar: {
@@ -21,7 +21,7 @@ const navbarStyle = makeStyles((theme: Theme) => ({
         width: '35px',
         height: '35px',
         borderRadius: '50%',
-        border: `2px solid ${lightenedBgColorPurple}`,
+        border: `2px solid ${lightPurple}`,
         position: 'relative' as const,
         top: '2px'
     },

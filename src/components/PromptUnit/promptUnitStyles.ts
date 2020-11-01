@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import { lightenedBgColorPurple } from '../../assets/tsstyles/constants';
+import { lightPurple } from '../../assets/tsstyles/constants';
 
 const promptUnitStyles = makeStyles(() => ({
     promptUnit: {
@@ -9,7 +9,7 @@ const promptUnitStyles = makeStyles(() => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'baseline',
-        color: lightenedBgColorPurple
+        color: lightPurple
     },
     btnAlternative: {
         background: 'transparent',

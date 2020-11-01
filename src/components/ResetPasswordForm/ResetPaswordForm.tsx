@@ -8,6 +8,7 @@ import { finalize, map } from 'rxjs/operators';
 import * as AuthService from '../../services/auth.service';
 import FormStyles from '../../styles/formStyles';
 import { ResetCredentialsType } from '../../types/Types';
+import PromptUnit from '../PromptUnit/PrompUnit';
 
 const resetPasswordPromptText = "Reset password";
 const returnToLoginPromptText = "Back to Login";
@@ -20,7 +21,7 @@ const useStyles = FormStyles;
 let validationErrorMsg = '';
 
 type ResetPasswordProps = {
-    toggleLoginMode?: () => void;
+    toggleLoginMode: () => void;
 }
 
 type ResetSuccessType = {
@@ -141,15 +142,13 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                 </div>
                 {resetSuccess.isSuccessful && <div className={classes.successMessage}>{resetSuccess.message}</div>}
             </div>
-
-            <div className={classes.promptUnit}>
-                <span>{returnToLoginPromptText}</span>
-                <button className={classes.btnAlternative}
-                    onClick={resetProps.toggleLoginMode}
-                    type="button">
-                    Login
-                </button>
+            <div className={classes.promptContainer}>
+                <PromptUnit
+                    btnText="Login"
+                    promptText={returnToLoginPromptText}
+                    toggle={resetProps.toggleLoginMode} />
             </div>
+
         </>
     )
 }

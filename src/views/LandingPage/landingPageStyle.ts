@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 import * as bg from '../../assets/img/paintwallpaper.jpg';
-import { lightenedBgColorPurple, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { lightPurple, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const landingPageStyle = makeStyles(() => ({
     showcase: {
@@ -26,7 +26,7 @@ const landingPageStyle = makeStyles(() => ({
         backgroundColor: mainBackgroundColor,
         padding: '1rem',
         borderRadius: '2%',
-        border: `2px solid ${lightenedBgColorPurple}`,
+        border: `2px solid ${lightPurple}`,
         zIndex: 2,
     },
     btn: {

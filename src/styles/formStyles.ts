@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import { fontColorTaupe, lightenedBgColorPurple } from '../assets/tsstyles/constants';
+import { fontColorTaupe, lightPurple } from '../assets/tsstyles/constants';
 
 const FormStyles = makeStyles(() => ({
     form: {
@@ -12,7 +12,7 @@ const FormStyles = makeStyles(() => ({
     inputFields: {
         margin: '0.5rem 1rem',
         padding: '0.5rem',
-        border: `1px solid ${lightenedBgColorPurple}`,
+        border: `1px solid ${lightPurple}`,
         borderRadius: '5px',
         background: 'transparent',
         color: fontColorTaupe,
@@ -21,14 +21,6 @@ const FormStyles = makeStyles(() => ({
     promptContainer: {
         alignItems: 'center',
         fontSize: '0.9rem'
-    },
-    promptUnit: {
-        width: '80%',
-        margin: 'auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'baseline',
-        color: lightenedBgColorPurple
     },
     btn: {
         color: fontColorTaupe,
@@ -39,24 +31,11 @@ const FormStyles = makeStyles(() => ({
         border: 'none',
         '&:hover': {
             transform: 'scale(1.2)',
-            backgroundColor: lightenedBgColorPurple,
+            backgroundColor: lightPurple,
             color: 'white'
         },
         ' &:focus': {
             outline: 'none',
-        }
-    },
-    btnAlternative: {
-        background: 'transparent',
-        color: 'grey',
-        fontSize: '0.7rem',
-        outline: 'none',
-        cursor: 'pointer',
-        border: 'none',
-        // borderRadius: '5px',
-        marginTop: '0.5rem',
-        '&:hover': {
-            color: '#720178'
         }
     },
     errorMessage: {

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import { drawerWidth, fontColorLightBlue } from '../../assets/tsstyles/constants';
+import { drawerWidth, bgColorPurple, fontColorLightBlue } from '../../assets/tsstyles/constants';
 
 const sidebarStyle = makeStyles(() => ({
     drawerPaper: {
@@ -68,8 +68,8 @@ const sidebarStyle = makeStyles(() => ({
             height: '100%',
             content: '""',
             display: 'block',
-            background: '#483C32',
-            opacity: '.9'
+            background: bgColorPurple,
+            opacity: '.8'
         }
     }
 }));
