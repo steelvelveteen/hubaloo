@@ -8,6 +8,7 @@ import { finalize, map } from 'rxjs/operators';
 import * as AuthService from '../../services/auth.service';
 import FormStyles from '../../styles/formStyles';
 import { CredentialsType } from '../../types/Types';
+import PromptUnit from '../PromptUnit/PrompUnit';
 
 const signUpPromptText = "Don't have an account?";
 const passwordResetPromptText = "Forgot your password?";
@@ -20,8 +21,8 @@ const useStyles = FormStyles;
 let validationErrorMsg = '';
 
 type LoginProps = {
-    toggleMode: () => void;
-    togglePasswordResetMode?: () => void;
+    togglePasswordResetMode: () => void;
+    toggleSignUpMode: () => void;
 }
 
 type LoginFailureType = {
@@ -145,22 +146,30 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
                 </div>
             </div>
             <div className={classes.promptContainer}>
-                <div className={classes.promptUnit}>
+                {/* <div className={classes.promptUnit}>
                     <span>{signUpPromptText}</span>
                     <button className={classes.btnAlternative}
-                        onClick={loginProps.toggleMode}
+                        onClick={loginProps.toggleSignUpMode}
                         type="button">
                         Sign Up
                     </button>
-                </div>
-                <div className={classes.promptUnit}>
+                </div> */}
+                <PromptUnit
+                    btnText="Sign Up"
+                    promptText={signUpPromptText}
+                    toggle={loginProps.toggleSignUpMode} />
+                {/* <div className={classes.promptUnit}>
                     <span>{passwordResetPromptText}</span>
                     <button className={classes.btnAlternative}
                         onClick={loginProps.togglePasswordResetMode}
                         type="button">
                         Reset
                     </button>
-                </div>
+                </div> */}
+                <PromptUnit
+                    btnText="Reset"
+                    promptText={passwordResetPromptText}
+                    toggle={loginProps.togglePasswordResetMode} />
             </div>
         </>
     );

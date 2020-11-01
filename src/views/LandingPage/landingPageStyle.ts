@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 import * as bg from '../../assets/img/paintwallpaper.jpg';
-import { fontColorPink, mainBackgroundColor } from '../../assets/tsstyles/constants';
+import { lightenedBgColorPurple, mainBackgroundColor } from '../../assets/tsstyles/constants';
 
 const landingPageStyle = makeStyles(() => ({
     showcase: {
@@ -22,17 +22,12 @@ const landingPageStyle = makeStyles(() => ({
         height: '100%',
     },
     formContainer: {
-        // opacity: '0.95',
         minWidth: '368px',
         backgroundColor: mainBackgroundColor,
         padding: '1rem',
         borderRadius: '2%',
-        border: `2px solid ${fontColorPink}`,
+        border: `2px solid ${lightenedBgColorPurple}`,
         zIndex: 2,
-    },
-    welcomeTitle: {
-        textTransform: 'uppercase',
-        letterSpacing: '0.5rem'
     },
     btn: {
         textDecoration: 'none',

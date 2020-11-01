@@ -20,7 +20,7 @@ const useStyles = FormStyles;
 let validationErrorMsg = '';
 
 type SignUpProps = {
-    toggleMode: () => void;
+    toggleLoginMode: () => void;
 }
 
 const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
@@ -137,7 +137,7 @@ const SignUpForm: React.FC<SignUpProps> = (signUpProps: SignUpProps) => {
                 <div className={classes.promptUnit}>
                     <span>{loginPromptText}</span>
                     <button className={classes.btnAlternative}
-                        onClick={signUpProps.toggleMode}
+                        onClick={signUpProps.toggleLoginMode}
                         type="button">
                         Login
                 </button>

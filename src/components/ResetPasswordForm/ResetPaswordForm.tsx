@@ -20,9 +20,9 @@ const useStyles = FormStyles;
 let validationErrorMsg = '';
 
 type ResetPasswordProps = {
-    toggleMode?: () => void;
-    togglePasswordResetMode: () => void;
+    toggleLoginMode?: () => void;
 }
+
 type ResetSuccessType = {
     isSuccessful: boolean,
     message: string
@@ -142,10 +142,10 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = (resetProps: ResetPasswo
                 {resetSuccess.isSuccessful && <div className={classes.successMessage}>{resetSuccess.message}</div>}
             </div>
 
-            <div className={classes.promptContainer}>
+            <div className={classes.promptUnit}>
                 <span>{returnToLoginPromptText}</span>
                 <button className={classes.btnAlternative}
-                    onClick={resetProps.togglePasswordResetMode}
+                    onClick={resetProps.toggleLoginMode}
                     type="button">
                     Login
                 </button>
