@@ -11,7 +11,7 @@ const localDockerApi = 'http://localhost:49160';
 const elasticBeanStalkApi = 'http://habalooapiebdocker-env.eba-mfhpxbcb.ap-southeast-2.elasticbeanstalk.com';
 const localNetcoreApi = 'http://localhost:5000';
 
-const customBaseURL = localNetcoreApi;
+const customBaseURL = herokuApi;
 
 const authAxios: AxiosInstance = axios.create({
     baseURL: customBaseURL,
