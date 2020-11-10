@@ -5,7 +5,7 @@ import { CircularProgress } from '@material-ui/core';
 import { AxiosError, AxiosResponse } from 'axios';
 import { finalize, map } from 'rxjs/operators';
 
-import * as AuthService from '../../services/auth.service';
+import * as _authService from '../../services/auth.service';
 import FormStyles from '../../styles/formStyles';
 import { CredentialsType } from '../../types/Types';
 import PromptUnit from '../PromptUnit/PrompUnit';
@@ -64,7 +64,7 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
 
     const loginSubmit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        AuthService.Login(credentials)
+        _authService.Login(credentials)
             .pipe(
                 map(
                     (response: AxiosResponse) => response.data
@@ -90,12 +90,12 @@ const LoginForm: React.FC<LoginProps> = (loginProps: LoginProps) => {
 
     const submit = (event: React.SyntheticEvent<EventTarget>): void => {
         event.preventDefault();
-        if (AuthService.validateEmail(credentials.email) === null) {
+        if (_authService.validateEmail(credentials.email) === null) {
             validationErrorMsg = invalidEmailMsg;
             setValidationFailed(true);
             return;
         }
-        if (!AuthService.validatePassword(credentials.password)) {
+        if (!_authService.validatePassword(credentials.password)) {
             validationErrorMsg = invalidPasswordMsg;
             setValidationFailed(true);
             return;
