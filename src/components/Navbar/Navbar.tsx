@@ -7,7 +7,7 @@ import {
 import Menu from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
-import { flameColor, lightPurple } from '../../assets/tsstyles/constants';
+import { lightPurple } from '../../assets/tsstyles/constants';
 import { Routes } from '../../types/Routes';
 import navbarStyle from './navbarStyle';
 

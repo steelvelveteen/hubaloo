@@ -39,7 +39,9 @@ const Sidebar: React.FC<SidebarProps> = (sidebarProps: SidebarProps) => {
                         <Icon className={classes.itemIcon}>
                             <prop.icon />
                         </Icon>
-                        <ListItemText classes={{ primary: classes.itemText }} primary={prop.routeName} />
+                        <ListItemText
+                        classes={{ primary: classes.itemText }}
+                        primary={prop.routeName} />
                     </ListItem>
                 </NavLink>
             ))}
