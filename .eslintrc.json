@@ -20,6 +20,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "linebreak-style": 0,
     "comma-dangle": "off",
     "global-require": "off",
     "import-helpers/order-imports": ["error", {
